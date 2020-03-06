@@ -39,7 +39,8 @@ namespace Compi1_Proyecto1
       EXPRESION_REGULAR,
       CADENA,
       CARACTER,
-      SIMBOLO
+      SIMBOLO,
+      NUMERO
     }
 
     private Tipo tipo;
@@ -137,6 +138,10 @@ namespace Compi1_Proyecto1
           return "Simbolo";
         case Tipo.CARACTER:
           return "Caracter";
+        case Tipo.NUMERO:
+          return "Numero";
+        case Tipo.COMA:
+          return "Coma";
         default:
           return "Token Desconocido";
       }

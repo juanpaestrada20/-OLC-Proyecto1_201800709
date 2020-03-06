@@ -27,14 +27,7 @@ namespace Compi1_Proyecto1
 
     private void pictureBox1_Click(object sender, EventArgs e)
     {
-      if(MenuVertical.Width == 280)
-      {
-        MenuVertical.Width = 0;
-      }
-      else
-      {
-        MenuVertical.Width = 280;
-      }
+      
     }
     private void btnMax_Click(object sender, EventArgs e)
     {
@@ -117,6 +110,25 @@ namespace Compi1_Proyecto1
     private void btnMinimize_Click(object sender, EventArgs e)
     {
       this.WindowState = FormWindowState.Minimized;
+    }
+
+    private void btnMenuHide_Click(object sender, EventArgs e)
+    {
+      if (Menu.Width == 300)
+      {
+        Menu.Width = 82;
+      }
+      else
+      {
+        Menu.Width = 300;
+      }
+    }
+
+    private void pictureBox4_Click(object sender, EventArgs e)
+    {
+      AnalizadorLexico analizador = new AnalizadorLexico();
+      LinkedList<Token> listaTokens = analizador.Escanner(richTextBox1.Text);
+      analizador.imprimirTokens();
     }
   }
 }

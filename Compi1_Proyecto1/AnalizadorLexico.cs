@@ -153,6 +153,12 @@ namespace Compi1_Proyecto1
               columna++;
               agregarToken(Token.Tipo.PORCENTAJE);
             }
+            else if (Char.IsDigit(c))
+            {
+              auxlex += c;
+              columna++;
+              estado = 8;
+            }
             //todo
             else if (c.CompareTo('[') == 0)
             {
@@ -164,7 +170,7 @@ namespace Compi1_Proyecto1
           // comentario de una linea
           case 1:
             bool comentario = false;
-            if (c.CompareTo('/') == 0 && auxlex.CompareTo('/') == 0)
+            if (c.CompareTo('/') == 0 && auxlex.CompareTo("/") == 0)
             {
               auxlex += c;
               columna++;
@@ -197,34 +203,34 @@ namespace Compi1_Proyecto1
             break;
           //Comentario multilinea
           case 2:
-            bool comentarioM = false;
-            if (c.CompareTo('!') == 0 && auxlex.CompareTo('<') == 0)
+            if (c.CompareTo('!') == 0 && auxlex.CompareTo("<") == 0)
             {
               auxlex += c;
               columna++;
               agregarToken(Token.Tipo.INICIO_MULTILINEA);
               estado = 2;
-              comentarioM = true;
+
             }
-            else if (c.CompareTo('!') == 0 && comentarioM)
+            else if (c.CompareTo('!') == 0)
             {
               agregarToken(Token.Tipo.COMENTARIO_MULTILINEA);
               columna++;
               auxlex += c;
+              estado = 2;
             }
-            else if (comentarioM && c.CompareTo('\n') == 0)
+            else if (c.CompareTo('\n') == 0)
             {
               auxlex += c;
               columna = 0;
               estado = 2;
             }
-            else if (c.CompareTo('>') == 0 && comentarioM)
+            else if (c.CompareTo('>') == 0)
             {
               auxlex += c;
               columna++;
               agregarToken(Token.Tipo.FIN_MULTILINEA);
             }
-            else if (!comentarioM && c.CompareTo('\n') == 0)
+            else if (c.CompareTo('\n') == 0)
             {
               agregarError("Se esperaba el caracter '!'");
             }
@@ -342,6 +348,18 @@ namespace Compi1_Proyecto1
               agregarError("Falta \'}\'");
             }
             break;
+          case 8:
+            if (!Char.IsDigit(c))
+            {
+              agregarToken(Token.Tipo.NUMERO);
+              i--;
+            }
+            else
+            {
+              auxlex += c;
+              columna++;
+            }
+            break;
             //todo
         }
       }
@@ -360,6 +378,21 @@ namespace Compi1_Proyecto1
       salidaErrores.AddLast(new Error(auxlex, descripcion, fila, columna));
       auxlex = "";
       estado = 0;
+    }
+
+    public void generarListaTokes()
+    {
+
+    }
+
+    public void imprimirTokens()
+    {
+      int contador = 1;
+      foreach(Token item in salidaTokens)
+      {
+        Console.WriteLine(contador + ". " + item.getTipo() + " -> " + item.getValor());
+        contador++;
+      }
     }
   }
 }
