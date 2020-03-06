@@ -36,12 +36,6 @@ namespace Compi1_Proyecto1
         MenuVertical.Width = 280;
       }
     }
-
-    private void btnCerrar_Click(object sender, EventArgs e)
-    {
-      Application.Exit();
-    }
-
     private void btnMax_Click(object sender, EventArgs e)
     {
       this.WindowState = FormWindowState.Maximized;
@@ -71,17 +65,6 @@ namespace Compi1_Proyecto1
         btnRestore.Visible = false;
       }
     }
-
-    private void label2_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void label6_Click(object sender, EventArgs e)
-    {
-
-    }
-
     private RichTextBox GetRichTextBox()
     {
       RichTextBox rtb = null;
@@ -110,6 +93,30 @@ namespace Compi1_Proyecto1
     private void Form1_Load(object sender, EventArgs e)
     {
 
+    }
+
+    private void btnClose_Click(object sender, EventArgs e)
+    {
+      Application.Exit();
+    }
+
+    private void btnMaximize_Click(object sender, EventArgs e)
+    {
+      this.WindowState = FormWindowState.Maximized;
+      btnMaximize.Visible = false;
+      btnNormalSize.Visible = true;
+    }
+
+    private void btnNormalSize_Click(object sender, EventArgs e)
+    {
+      this.WindowState = FormWindowState.Normal;
+      btnMaximize.Visible = true;
+      btnNormalSize.Visible = false;
+    }
+
+    private void btnMinimize_Click(object sender, EventArgs e)
+    {
+      this.WindowState = FormWindowState.Minimized;
     }
   }
 }

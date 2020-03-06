@@ -32,6 +32,15 @@ namespace Compi1_Proyecto1
             this.Menu = new System.Windows.Forms.Panel();
             this.BarraTop = new System.Windows.Forms.Panel();
             this.Container = new System.Windows.Forms.Panel();
+            this.btnClose = new System.Windows.Forms.PictureBox();
+            this.btnMaximize = new System.Windows.Forms.PictureBox();
+            this.btnNormalSize = new System.Windows.Forms.PictureBox();
+            this.btnMinimize = new System.Windows.Forms.PictureBox();
+            this.BarraTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnMaximize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnNormalSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnMinimize)).BeginInit();
             this.SuspendLayout();
             // 
             // Menu
@@ -46,6 +55,10 @@ namespace Compi1_Proyecto1
             // BarraTop
             // 
             this.BarraTop.BackColor = System.Drawing.Color.RoyalBlue;
+            this.BarraTop.Controls.Add(this.btnMinimize);
+            this.BarraTop.Controls.Add(this.btnNormalSize);
+            this.BarraTop.Controls.Add(this.btnMaximize);
+            this.BarraTop.Controls.Add(this.btnClose);
             this.BarraTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.BarraTop.Location = new System.Drawing.Point(300, 0);
             this.BarraTop.Name = "BarraTop";
@@ -60,6 +73,59 @@ namespace Compi1_Proyecto1
             this.Container.Size = new System.Drawing.Size(900, 740);
             this.Container.TabIndex = 2;
             // 
+            // btnClose
+            // 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
+            this.btnClose.Location = new System.Drawing.Point(868, 12);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(20, 20);
+            this.btnClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnClose.TabIndex = 0;
+            this.btnClose.TabStop = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // btnMaximize
+            // 
+            this.btnMaximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMaximize.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMaximize.Image = ((System.Drawing.Image)(resources.GetObject("btnMaximize.Image")));
+            this.btnMaximize.Location = new System.Drawing.Point(842, 12);
+            this.btnMaximize.Name = "btnMaximize";
+            this.btnMaximize.Size = new System.Drawing.Size(20, 20);
+            this.btnMaximize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnMaximize.TabIndex = 1;
+            this.btnMaximize.TabStop = false;
+            this.btnMaximize.Click += new System.EventHandler(this.btnMaximize_Click);
+            // 
+            // btnNormalSize
+            // 
+            this.btnNormalSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNormalSize.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNormalSize.Image = ((System.Drawing.Image)(resources.GetObject("btnNormalSize.Image")));
+            this.btnNormalSize.Location = new System.Drawing.Point(842, 12);
+            this.btnNormalSize.Name = "btnNormalSize";
+            this.btnNormalSize.Size = new System.Drawing.Size(20, 20);
+            this.btnNormalSize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnNormalSize.TabIndex = 2;
+            this.btnNormalSize.TabStop = false;
+            this.btnNormalSize.Visible = false;
+            this.btnNormalSize.Click += new System.EventHandler(this.btnNormalSize_Click);
+            // 
+            // btnMinimize
+            // 
+            this.btnMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMinimize.Image = ((System.Drawing.Image)(resources.GetObject("btnMinimize.Image")));
+            this.btnMinimize.Location = new System.Drawing.Point(816, 12);
+            this.btnMinimize.Name = "btnMinimize";
+            this.btnMinimize.Size = new System.Drawing.Size(20, 20);
+            this.btnMinimize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnMinimize.TabIndex = 3;
+            this.btnMinimize.TabStop = false;
+            this.btnMinimize.Click += new System.EventHandler(this.btnMinimize_Click);
+            // 
             // Form1
             // 
             this.BackColor = System.Drawing.Color.DeepSkyBlue;
@@ -72,6 +138,11 @@ namespace Compi1_Proyecto1
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.BarraTop.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnMaximize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnNormalSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnMinimize)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -102,6 +173,10 @@ namespace Compi1_Proyecto1
     private System.Windows.Forms.Panel Menu;
     private System.Windows.Forms.Panel BarraTop;
     private System.Windows.Forms.Panel Container;
+    private System.Windows.Forms.PictureBox btnMinimize;
+    private System.Windows.Forms.PictureBox btnNormalSize;
+    private System.Windows.Forms.PictureBox btnMaximize;
+    private System.Windows.Forms.PictureBox btnClose;
   }
 }
 
