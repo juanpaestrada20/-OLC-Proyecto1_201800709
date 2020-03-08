@@ -1,0 +1,9 @@
+C:\Users\juanp\source\repos\Compi1_Proyecto1\Compi1_Proyecto1\bin\Debug\Compi1_Proyecto1.exe.config
+C:\Users\juanp\source\repos\Compi1_Proyecto1\Compi1_Proyecto1\bin\Debug\Compi1_Proyecto1.exe
+C:\Users\juanp\source\repos\Compi1_Proyecto1\Compi1_Proyecto1\bin\Debug\Compi1_Proyecto1.pdb
+C:\Users\juanp\source\repos\Compi1_Proyecto1\Compi1_Proyecto1\obj\Debug\Compi1_Proyecto1.csprojAssemblyReference.cache
+C:\Users\juanp\source\repos\Compi1_Proyecto1\Compi1_Proyecto1\obj\Debug\Compi1_Proyecto1.Form1.resources
+C:\Users\juanp\source\repos\Compi1_Proyecto1\Compi1_Proyecto1\obj\Debug\Compi1_Proyecto1.Properties.Resources.resources
+C:\Users\juanp\source\repos\Compi1_Proyecto1\Compi1_Proyecto1\obj\Debug\Compi1_Proyecto1.csproj.GenerateResource.cache
+C:\Users\juanp\source\repos\Compi1_Proyecto1\Compi1_Proyecto1\obj\Debug\Compi1_Proyecto1.exe
+C:\Users\juanp\source\repos\Compi1_Proyecto1\Compi1_Proyecto1\obj\Debug\Compi1_Proyecto1.pdb

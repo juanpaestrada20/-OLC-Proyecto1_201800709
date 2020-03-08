@@ -22,11 +22,11 @@ namespace Compi1_Proyecto1
       CERRADURA_POSITIVA,
       PALABRA_RESERVADA,
       CONJUNTO,
-      SALTO_DE_LINEA,
+      SALTO_DE_LINEA,//
       COMILLA_SIMPLE,
       COMILLA_DOBLE,
-      TABULACION,
-      TODO,
+      TABULACION,//
+      TODO,//
       ID,
       ASIGNACION,
       LLAVE_ABRE,
@@ -38,7 +38,9 @@ namespace Compi1_Proyecto1
       COMA,
       EXPRESION_REGULAR,
       CADENA,
-      SIMBOLO
+      CARACTER,
+      SIMBOLO,
+      NUMERO
     }
 
     private Tipo tipo;
@@ -134,6 +136,12 @@ namespace Compi1_Proyecto1
           return "Cadena";
         case Tipo.SIMBOLO:
           return "Simbolo";
+        case Tipo.CARACTER:
+          return "Caracter";
+        case Tipo.NUMERO:
+          return "Numero";
+        case Tipo.COMA:
+          return "Coma";
         default:
           return "Token Desconocido";
       }
