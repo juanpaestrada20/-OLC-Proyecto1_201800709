@@ -116,7 +116,13 @@ namespace Compi1_Proyecto1
               auxlex += c;
               columna++;
               agregarToken(Token.Tipo.LLAVE_ABRE);
-              estado = 7;
+            }
+            //llave cierra
+            else if(c.CompareTo('}') == 0)
+            {
+              auxlex += c;
+              columna++;
+              agregarToken(Token.Tipo.LLAVE_CIERRA);
             }
             //punto coma
             else if (c.CompareTo(';') == 0)
@@ -164,7 +170,13 @@ namespace Compi1_Proyecto1
             {
               auxlex += c;
               columna++;
-              
+              estado = 7;
+            }
+            else if((((int)c >= 33) && ((int)c <= 64)) || (((int)c >= 91) && ((int)c <= 96)) )
+            {
+              auxlex += c;
+              columna++;
+              agregarToken(Token.Tipo.CARACTER);
             }
             break;
           // comentario de una linea
@@ -216,7 +228,14 @@ namespace Compi1_Proyecto1
               agregarToken(Token.Tipo.COMENTARIO_MULTILINEA);
               columna++;
               auxlex += c;
-              estado = 2;
+              i++;
+              c = entrada.ElementAt(i);
+              if(c.CompareTo('>') == 0)
+              {
+                auxlex += c;
+                columna++;
+                agregarToken(Token.Tipo.FIN_MULTILINEA);
+              }
             }
             else if (c.CompareTo('\n') == 0)
             {
@@ -224,15 +243,11 @@ namespace Compi1_Proyecto1
               columna = 0;
               estado = 2;
             }
-            else if (c.CompareTo('>') == 0)
+            else if (c.CompareTo('>') == 0 && auxlex.Contains("~"))
             {
               auxlex += c;
               columna++;
-              agregarToken(Token.Tipo.FIN_MULTILINEA);
-            }
-            else if (c.CompareTo('\n') == 0)
-            {
-              agregarError("Se esperaba el caracter '!'");
+              agregarToken(Token.Tipo.CONJUNTO);
             }
             else
             {
@@ -306,6 +321,13 @@ namespace Compi1_Proyecto1
               fila++;
               columna = 0;
             }
+            else if(c.CompareTo('}') == 0)
+            {
+              agregarToken(Token.Tipo.ID);
+              auxlex += c;
+              columna++;
+              agregarToken(Token.Tipo.LLAVE_CIERRA);
+            }
             break;
           //->
           case 6:
@@ -324,12 +346,7 @@ namespace Compi1_Proyecto1
             break;
           //dentro de llaves
           case 7:
-            if (Char.IsLetterOrDigit(c))
-            {
-              auxlex += c;
-              columna++;
-            }
-            else if (c.CompareTo('}') == 0)
+            if (c.CompareTo('}') == 0)
             {
               agregarToken(Token.Tipo.CONJUNTO);
               auxlex += c;
@@ -338,14 +355,20 @@ namespace Compi1_Proyecto1
             }
             else if (c.CompareTo(' ') == 0)
             {
+              auxlex += c;
               columna++;
-              agregarError("Falta \'}\'");
+              agregarToken(Token.Tipo.LLAVE_CIERRA);
             }
             else if (c.CompareTo('\n') == 0)
             {
-              columna = 0;
-              fila++;
-              agregarError("Falta \'}\'");
+              auxlex += c;
+              columna++;
+              agregarToken(Token.Tipo.LLAVE_CIERRA);
+            }
+            else
+            {
+              auxlex += c;
+              columna++;
             }
             break;
           case 8:
