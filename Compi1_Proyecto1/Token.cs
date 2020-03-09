@@ -40,7 +40,8 @@ namespace Compi1_Proyecto1
       CADENA,
       CARACTER,
       SIMBOLO,
-      NUMERO
+      NUMERO,
+      ULTIMO
     }
 
     private Tipo tipo;
@@ -74,6 +75,11 @@ namespace Compi1_Proyecto1
     public String getValor()
     {
       return valor;
+    }
+
+    public Tipo getTipoToken()
+    {
+      return this.tipo;
     }
 
     public String getTipo()
@@ -142,6 +148,8 @@ namespace Compi1_Proyecto1
           return "Numero";
         case Tipo.COMA:
           return "Coma";
+        case Tipo.ULTIMO:
+          return "#Ultimo";
         default:
           return "Token Desconocido";
       }

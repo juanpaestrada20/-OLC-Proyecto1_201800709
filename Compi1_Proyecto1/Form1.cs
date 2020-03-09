@@ -128,6 +128,7 @@ namespace Compi1_Proyecto1
     {
       AnalizadorLexico analizador = new AnalizadorLexico();
       LinkedList<Token> listaTokens = analizador.Escanner(richTextBox1.Text);
+      analizador.agregarUltimo();
       analizador.imprimirTokens();
     }
   }

@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Compi1_Proyecto1
 {
@@ -14,6 +16,8 @@ namespace Compi1_Proyecto1
     private int fila;
     private int columna;
     private int estado;
+    public static string rutaTokens = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\tokens.xml";
+    public static string rutaErrores = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\errores.xml";
 
     public LinkedList<Token> Escanner(String entrada)
     {
@@ -341,7 +345,7 @@ namespace Compi1_Proyecto1
             {
               auxlex += c;
               columna++;
-              agregarError("Hizo falta \'>\'");
+              agregarToken(Token.Tipo.CARACTER);
             }
             break;
           //dentro de llaves
@@ -403,9 +407,76 @@ namespace Compi1_Proyecto1
       estado = 0;
     }
 
-    public void generarListaTokes()
+    public void generarListaTokens()
     {
+      try
+      {
+        MessageBox.Show("HTML errores ha sido creado", "HTML creado");
 
+        using (Stream s = File.Open(rutaTokens, FileMode.OpenOrCreate))
+        using (StreamWriter sw = new StreamWriter(s))
+        {
+          sw.WriteLine("<ListaTokens>");
+          foreach (Token item in salidaTokens)
+          {
+            sw.WriteLine("<Token>");
+            sw.WriteLine("<Nombre>" + item.getTipo() + "</Nombre>");
+            sw.WriteLine("<Valor> \"" + item.getValor() + "\"</Valor>");
+            sw.WriteLine("<Fila>" + item.getFila() + "</Fila>");
+            sw.WriteLine("<Columna>" + item.getColumna() + "</Columna>");
+            sw.WriteLine("</Token>");
+          }
+          sw.Write("</ListaTokens>");
+        }
+      }
+      catch (FileNotFoundException ex)
+      {
+        if (ex.Source != null)
+          Console.WriteLine("IOException source: {0}", ex.Source);
+        throw;
+      }
+      catch (IOException ex)
+      {
+        if (ex.Source != null)
+          Console.WriteLine("IOException source: {0}", ex.Source);
+        throw;
+      }
+    }
+
+    public void generarListaError()
+    {
+      try
+      {
+        MessageBox.Show("HTML errores ha sido creado", "HTML creado");
+
+        using (Stream s = File.Open(rutaErrores, FileMode.OpenOrCreate))
+        using (StreamWriter sw = new StreamWriter(s))
+        {
+          sw.WriteLine("<ListaErrores>");
+          foreach (Error item in salidaErrores)
+          {
+            sw.WriteLine("<Error>");
+            sw.WriteLine("<Valor>" + item.getError() + "</Valor>");
+            sw.WriteLine("<Descripcion>" + item.getDescripcion() + "</Descripcion>");
+            sw.WriteLine("<Fila>" + item.getFila() + "</Fila>");
+            sw.WriteLine("<Columna>" + item.getColumna() + "</Columna>");
+            sw.WriteLine("</Error>");
+          }
+          sw.Write("</ListaErrores>");
+        }
+      }
+      catch (FileNotFoundException ex)
+      {
+        if (ex.Source != null)
+          Console.WriteLine("IOException source: {0}", ex.Source);
+        throw;
+      }
+      catch (IOException ex)
+      {
+        if (ex.Source != null)
+          Console.WriteLine("IOException source: {0}", ex.Source);
+        throw;
+      }
     }
 
     public void imprimirTokens()
@@ -416,6 +487,22 @@ namespace Compi1_Proyecto1
         Console.WriteLine(contador + ". " + item.getTipo() + " -> " + item.getValor());
         contador++;
       }
+    }
+
+    public void imprimirErrores()
+    {
+      int contador = 1;
+      foreach (Error item in salidaErrores)
+      {
+        Console.WriteLine(contador + ". " + item.getError() + " -> " + item.getFila() + " -> " + item.getDescripcion());
+        contador++;
+      }
+    }
+
+    public void agregarUltimo()
+    {
+      auxlex = "#";
+      agregarToken(Token.Tipo.ULTIMO);
     }
   }
 }
