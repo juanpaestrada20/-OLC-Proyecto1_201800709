@@ -127,9 +127,12 @@ namespace Compi1_Proyecto1
     private void pictureBox4_Click(object sender, EventArgs e)
     {
       AnalizadorLexico analizador = new AnalizadorLexico();
+      AnalizadorSintactico sintactico = new AnalizadorSintactico();
       LinkedList<Token> listaTokens = analizador.Escanner(richTextBox1.Text);
       analizador.agregarUltimo();
-      analizador.imprimirTokens();
+      //analizador.imprimirTokens();
+
+      sintactico.parser(listaTokens);
     }
   }
 }

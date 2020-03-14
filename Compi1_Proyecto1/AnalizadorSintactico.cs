@@ -10,13 +10,12 @@ namespace Compi1_Proyecto1
   {
     LinkedList<Token> salidaSintactico;
     private LinkedList<Token> listaAnalizada;
-    LinkedList<Error> salidaErrores;
     private Token actual;
     private int controlToken;
     private String conjunto;
 
 
-    public void parser (LinkedList<Token> tokens)
+    public void parser(LinkedList<Token> tokens)
     {
       listaAnalizada = new LinkedList<Token>();
       conjunto = "";
@@ -62,7 +61,7 @@ namespace Compi1_Proyecto1
       {
         match(Token.Tipo.ID);
         match(Token.Tipo.ASIGNACION);
-        ExpresionRegular();//falta
+        ExpresionRegular();
         match(Token.Tipo.PUNTO_COMA);
         Cuerpo();
       }
@@ -89,7 +88,36 @@ namespace Compi1_Proyecto1
 
     private void ExpresionRegular()
     {
+      LinkedList<Token> expresionRegular = new LinkedList<Token>();
+      while (actual.getTipoToken() != Token.Tipo.PUNTO_COMA)
+      {
+        if (actual.getTipoToken() == Token.Tipo.LLAVE_ABRE)
+        {
+          match(Token.Tipo.LLAVE_ABRE);
+        }
+        else if (actual.getTipoToken() == Token.Tipo.LLAVE_CIERRA)
+        {
+          match(Token.Tipo.LLAVE_CIERRA);
+        }
+        else
+        {
+          expresionRegular.AddLast(actual);
+          match(actual.getTipoToken());
+        }
+      }
+      Console.WriteLine("--------------------");
+      foreach(Token item in expresionRegular)
+      {
+        Console.WriteLine(item.getTipo());
+      }
+      generarArbol(expresionRegular);
+      expresionRegular.Clear();
+    }
 
+    private void generarArbol(LinkedList<Token> expresion)
+    {
+      Arbol arbol = new Arbol();
+      arbol.generarArbol(expresion);
     }
 
     private void verificarConjunto()
@@ -105,20 +133,28 @@ namespace Compi1_Proyecto1
         actual = salidaSintactico.ElementAt(controlToken);
         otroCaracter();
       }
-      else if(actual.getTipoToken() == Token.Tipo.ID)
+      else if (actual.getTipoToken() == Token.Tipo.ID)
       {
         actual.changeTipo(Token.Tipo.CONJUNTO);
         match(Token.Tipo.CONJUNTO);
+      }
+      else if (actual.getTipoToken() == Token.Tipo.NUMERO)
+      {
+        actual.changeTipo(Token.Tipo.CARACTER);
+        conjunto += actual.getValor();
+        salidaSintactico.Remove(salidaSintactico.ElementAt(controlToken));
+        actual = salidaSintactico.ElementAt(controlToken);
+        otroCaracter();
       }
     }
 
     private void match(Token.Tipo tipo)
     {
-      if(actual.getTipoToken() != tipo)
+      if (actual.getTipoToken() != tipo)
       {
-        Console.WriteLine("No se esperaba este caracter");
+        Console.WriteLine("No se esperaba este caracter, se esperaba" + tipo.ToString());
       }
-      else if(actual.getTipoToken() != Token.Tipo.ULTIMO)
+      else if (actual.getTipoToken() != Token.Tipo.ULTIMO)
       {
         listaAnalizada.AddLast(actual);
         controlToken++;
@@ -128,28 +164,36 @@ namespace Compi1_Proyecto1
 
     private void otroCaracter()
     {
-      if(actual.getTipoToken() == Token.Tipo.COMA)
+      if (actual.getTipoToken() == Token.Tipo.COMA)
       {
         match(Token.Tipo.COMA);
+        if (actual.getTipoToken() != Token.Tipo.CARACTER)
+        {
+          actual.changeTipo(Token.Tipo.CARACTER);
+        }
         match(Token.Tipo.CARACTER);
         controlToken -= 2;
-        conjunto += salidaSintactico.ElementAt(controlToken);
+        conjunto += salidaSintactico.ElementAt(controlToken).getValor();
         salidaSintactico.Remove(salidaSintactico.ElementAt(controlToken));
-        conjunto += salidaSintactico.ElementAt(controlToken);
+        conjunto += salidaSintactico.ElementAt(controlToken).getValor();
         salidaSintactico.Remove(salidaSintactico.ElementAt(controlToken));
         actual = salidaSintactico.ElementAt(controlToken);
         listaAnalizada.RemoveLast();
-        listaAnalizada.RemoveLast(); 
+        listaAnalizada.RemoveLast();
         otroCaracter();
       }
-      else if(actual.getTipoToken() == Token.Tipo.VIRGULILLA)
+      else if (actual.getTipoToken() == Token.Tipo.VIRGULILLA)
       {
         match(Token.Tipo.VIRGULILLA);
+        if (actual.getTipoToken() != Token.Tipo.CARACTER)
+        {
+          actual.changeTipo(Token.Tipo.CARACTER);
+        }
         match(Token.Tipo.CARACTER);
         controlToken -= 2;
-        conjunto += salidaSintactico.ElementAt(controlToken);
+        conjunto += salidaSintactico.ElementAt(controlToken).getValor();
         salidaSintactico.Remove(salidaSintactico.ElementAt(controlToken));
-        conjunto += salidaSintactico.ElementAt(controlToken);
+        conjunto += salidaSintactico.ElementAt(controlToken).getValor();
         salidaSintactico.Remove(salidaSintactico.ElementAt(controlToken));
         actual = salidaSintactico.ElementAt(controlToken);
         listaAnalizada.RemoveLast();
@@ -168,9 +212,14 @@ namespace Compi1_Proyecto1
       conjunto = "";
     }
 
-    //private String getError(Token.Tipo tipo)
-    //{
-
-    //}
+    public void imprimir()
+    {
+      int contador = 1;
+      foreach (Token item in listaAnalizada)
+      {
+        Console.WriteLine(contador + ". " + item.getTipo() + " -> " + item.getValor());
+        contador++;
+      }
+    }
   }
 }

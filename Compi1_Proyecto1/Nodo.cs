@@ -4,30 +4,39 @@ namespace Compi1_Proyecto1
 {
   class Nodo
   {
-    private Object dato;
+    private String dato;
     private Nodo izquierda;
     private Nodo derecha;
+    private String tipo;
+    private bool visitado;
 
-    public Nodo(Object dato)
+    public Nodo(String dato, String tipo)
     {
       this.dato = dato;
-      this.izquierda = null;
-      this.derecha = null;
+      izquierda = null;
+      derecha = null;
+      this.tipo = tipo;
+      visitado = false;
     }
 
-    public Object getDato()
+    public String getDato()
     {
-      return this.dato;
+     return dato;
     }
 
     public Nodo getIzquierda()
     {
-      return this.izquierda;
+      return izquierda;
     }
 
     public Nodo getDerecha()
     {
-      return this.derecha;
+      return derecha;
+    }
+
+    public String getTipo()
+    {
+      return tipo;
     }
 
     public void setIzquierda(Nodo izquierda)
@@ -40,9 +49,19 @@ namespace Compi1_Proyecto1
       this.derecha = derecha;
     }
 
-    public void setDato(Object dato)
+    public void setDato(String dato)
     {
       this.dato = dato;
+    }
+
+    public void setTipo(String tipo)
+    {
+      this.tipo = tipo;
+    }
+
+    public void visitar()
+    {
+      this.visitado = true;
     }
   }
 }
