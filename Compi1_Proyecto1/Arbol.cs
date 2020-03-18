@@ -1,21 +1,28 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Compi1_Proyecto1
 {
-  class Arbol
+  internal class Arbol
   {
     private Nodo raiz;
     private int index;
     private int i;
     private LinkedList<Token> tokens;
     private Token actual;
-    private LinkedList<Nodo> nodos;
-    private Stack<Nodo> expresion;
+    private LinkedList<Nodo> expresion;
+    private Stack<Nodo> nodos;
+    private String ruta;
+    private int numeroGrafica = 0;
+    public static int contador = 0;
+
     public Arbol()
     {
       raiz = null;
+      contador = 0;
+      ruta = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
     }
 
     public void setRaiz(Nodo raiz)
@@ -30,7 +37,7 @@ namespace Compi1_Proyecto1
 
     public void generarArbol(LinkedList<Token> tok)
     {
-      nodos = new LinkedList<Nodo>();
+      nodos = new Stack<Nodo>();
       index = 0;
       i = 0;
       tokens = tok;
@@ -41,123 +48,125 @@ namespace Compi1_Proyecto1
         Nodo temp = crearNodo(actual);
         if (temp != null)
         {
-          nodos.AddLast(temp);
+          nodos.Push(temp);
         }
         index++;
         actual = tokens.ElementAt(index);
       }
+      //recorrerNodo();
       metodoThompson();
+      graficar();
     }
 
-    private void insertarNodo(Nodo actual)
-    {
-      //raiz = agregarNodo(raiz, actual);
-    }
-
-    private Nodo agregarNodo(Nodo n, Nodo actual)
-    {
-      if(n == null)
-      {
-        n = actual;
-      }
-      else
-      {
-        if(n.getIzquierda().getTipo().CompareTo("operador") == 0)
-        {
-          n.setIzquierda(agregarNodo(n.getIzquierda(), actual));
-        }
-        else
-        {
-          n.setDerecha(agregarNodo(n.getDerecha(), actual));
-        }
-      }
-      return n;
-    }
     private Nodo crearNodo(Token dato)
     {
+      contador++;
       Nodo n;
       switch (dato.getTipoToken())
       {
         case Token.Tipo.CONCATENACION:
-          Nodo l = new Nodo(dato.getValor(), "operador");
+          Nodo l = new Nodo(contador, dato.getValor(), "operador");
           return l;
+
         case Token.Tipo.DISYUNCION:
-          n = new Nodo(dato.getValor(), "operador");
+          n = new Nodo(contador, dato.getValor(), "operador");
           return n;
+
         case Token.Tipo.CERRADURA_KLEENE:
-          n = new Nodo(dato.getValor(), "unario");
+          n = new Nodo(contador, dato.getValor(), "unario");
           return n;
+
         case Token.Tipo.CERRADURA_POSITIVA:
-          n = new Nodo(dato.getValor(), "unario");
+          n = new Nodo(contador, dato.getValor(), "unario");
           return n;
+
         case Token.Tipo.SIGNO_INTERROGACION:
-          n = new Nodo(dato.getValor(), "unario");
+          n = new Nodo(contador, dato.getValor(), "unario");
           return n;
+
         case Token.Tipo.ID:
         case Token.Tipo.CONJUNTO:
         case Token.Tipo.CARACTER:
         case Token.Tipo.CADENA:
-          n = new Nodo(dato.getValor(), "operando");
+          n = new Nodo(contador, dato.getValor(), "operando");
           return n;
+
         default:
           n = null;
           return n;
-
       }
     }
 
     public void recorrerNodo()
     {
-      foreach(Nodo item in nodos)
+      while (nodos.Count > 0)
       {
-        Console.WriteLine(item.getDato());
+        Console.WriteLine(nodos.Pop().getDato());
       }
     }
 
-    private void metodoThompson(Nodo actual)
-    {
+    private static Stack<Nodo> pilaAuxilar = new Stack<Nodo>();
 
-      raiz = thompson(raiz, actual);
-      //Nodo actual;
-      //Nodo n1;
-      //Nodo n2;
-      //while(i < nodos.Count)
-      //{
-      //  actual = nodos.ElementAt(i);
-      //  if(actual.getTipo() == "operador")
-      //  {
-      //    if(actual.getDato() == ".")
-      //    {
-      //      i++;
-      //      n1 = nodos.ElementAt(i);
-      //      i++;
-      //      n2 = nodos.ElementAt(i);
-      //      concatenar(n1, n2);
-      //    }
-      //  }
-      //  i++;
-      //}
-    }
-    private Nodo thompson(Nodo n, Nodo actual)
+    private void metodoThompson()
     {
-      if(n == null)
+      if (nodos.Count > 1)
       {
-        n = actual;
+        Nodo aux1 = nodos.Pop();
+        Nodo aux2 = nodos.Pop();
+
+        if (aux2.getTipo().CompareTo("unario") == 0)
+        {
+          if (aux2.getDato().CompareTo("?") == 0)
+          {
+            contador++;
+            aux2 = disyuncion(aux1, new Nodo(contador, "epsilon", "transicion"));
+            nodos.Push(aux2);
+          }
+          else if (aux2.getDato().CompareTo("*") == 0)
+          {
+            aux2 = cerraduraKleene(aux1);
+            nodos.Push(aux2);
+          }
+          else if (aux2.getDato().CompareTo("+") == 0)
+          {
+            aux2 = concatenar(aux1, cerraduraKleene(aux1));
+            nodos.Push(aux2);
+          }
+        }
+        else if ((aux2.getTipo().CompareTo("operando") == 0) && (aux2.getTipo().CompareTo("operando") == 0))
+        {
+          Nodo aux3 = nodos.Pop();
+          if (aux3.getTipo().CompareTo("operador") == 0)
+          {
+            if (aux3.getDato().CompareTo(".") == 0)
+            {
+              aux3 = concatenar(aux2, aux1);
+              nodos.Push(aux3);
+            }
+            else if (aux3.getDato().CompareTo("|") == 0)
+            {
+              aux3 = disyuncion(aux2, aux1);
+              nodos.Push(aux3);
+            }
+          }
+        }
+        metodoThompson();
       }
       else
       {
-        if((n.getTipo() == "operador") &&(n.getDerecha() == null) && n.getIzquierda() == null)
-        {
-          
-        }
+        raiz = nodos.Pop();
       }
-      return n;
     }
+
     private Nodo cerraduraKleene(Nodo n)
     {
-      Nodo n1 = new Nodo("epsilon", "transiciones");
-      Nodo n2 = new Nodo("", "transiciones");
-      Nodo n3 = new Nodo("epsilon", "transiciones");
+      contador++;
+      Nodo n1 = new Nodo(contador, "epsilon", "transiciones");
+      contador++;
+      Nodo n2 = new Nodo(contador, "epsilon", "transiciones");
+      contador++;
+      Nodo n3 = new Nodo(contador, "", "asignable");
+      n.setTipo("transicion");
       n1.setIzquierda(n);
       n1.setDerecha(n3);
       n.setIzquierda(n2);
@@ -169,7 +178,8 @@ namespace Compi1_Proyecto1
     private Nodo concatenar(Nodo n, Nodo n1)
     {
       n.setIzquierda(n1);
-      Nodo n2 = new Nodo("", "transiciones");
+      contador++;
+      Nodo n2 = new Nodo(contador, "", "asignable");
       n1.setIzquierda(n2);
       n.setTipo("transicion");
       n1.setTipo("transicion");
@@ -178,16 +188,86 @@ namespace Compi1_Proyecto1
 
     private Nodo disyuncion(Nodo n, Nodo n1)
     {
-      Nodo inicio = new Nodo("epsilon", "transiciones");
+      contador++;
+      Nodo inicio = new Nodo(contador, "epsilon", "transiciones");
       inicio.setIzquierda(n);
       inicio.setDerecha(n1);
-      Nodo fin = new Nodo("", "transiciones");
-      Nodo aux1 = new Nodo("epsilon", "transicion");
-      Nodo aux2 = new Nodo("epsilon", "transicion");
+      contador++;
+      Nodo fin = new Nodo(contador, "", "asignable");
+      contador++;
+      Nodo aux1 = new Nodo(contador, "epsilon", "transicion");
+      contador++;
+      Nodo aux2 = new Nodo(contador, "epsilon", "transicion");
+      n.setIzquierda(aux1);
+      n1.setIzquierda(aux2);
+      n.setTipo("transicion");
+      n1.setTipo("transicion");
       aux1.setIzquierda(fin);
       aux2.setIzquierda(fin);
 
       return inicio;
+    }
+
+    private StringBuilder grafo;
+    public Nodo auxiliaryNode;
+
+    private void graficar()
+    {
+      numeroGrafica++;
+      grafo = new StringBuilder();
+      String rdot = ruta + "\\imagen" + numeroGrafica + ".dot";
+      String rpng = ruta + "\\imagen" + numeroGrafica + ".png";
+      grafo.Append("digraph G {\nrankdir=LR;\nnode [margin=0 shape=oval style=filled ];\n");
+      auxiliaryNode = raiz;
+      enviarNodo(auxiliaryNode);
+      grafo.Append("}");
+      generarDot(rdot, rpng);
+    }
+
+    private String value;
+
+    private void enviarNodo(Nodo aux)
+    {
+      value = "";
+      if (aux != null)
+      {
+        if (!aux.isVisitado())
+        {
+          if (aux.getTipo().CompareTo("transicion") == 0)
+          {
+            value = aux.Index + " -> " + aux.getIzquierda().Index + "[label=\"" + aux.getDato() + "\"];\n";
+            grafo.Append(value);
+            aux.visitar();
+            enviarNodo(aux.getIzquierda());
+          }
+          else if (aux.getTipo().CompareTo("transiciones") == 0)
+          {
+            value = aux.Index + " -> " + aux.getIzquierda().Index + "[label=\"" + aux.getDato() + "\"];\n";
+            grafo.Append(value);
+            value = aux.Index + " -> " + aux.getDerecha().Index + "[label=\"" + aux.getDato() + "\"];\n";
+            grafo.Append(value);
+            aux.visitar();
+            enviarNodo(aux.getIzquierda());
+            enviarNodo(aux.getDerecha());
+          }
+          else if (aux.getTipo().CompareTo("asignable") == 0)
+          {
+            aux.visitar();
+          }
+        }
+      }
+    }
+
+    private void generarDot(String rdot, String rpng)
+    {
+      System.IO.File.WriteAllText(rdot, grafo.ToString());
+      String comandoDot = "dot.exe -Tpng " + rdot + " -o " + rpng;
+      var comando = string.Format(comandoDot);
+      var procStart = new System.Diagnostics.ProcessStartInfo("cmd", "/C" + comando);
+      var proc = new System.Diagnostics.Process();
+      proc.StartInfo = procStart;
+      proc.Start();
+      proc.WaitForExit();
     }
   }
 }

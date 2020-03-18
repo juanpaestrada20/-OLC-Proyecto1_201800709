@@ -1,16 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Compi1_Proyecto1
 {
-  class ListaNodos
+  internal class ListaNodos
   {
     private NodoLista cabeza;
     private NodoLista cola;
-    int size;
+    private int size;
 
     public ListaNodos()
     {
@@ -26,7 +20,20 @@ namespace Compi1_Proyecto1
 
     public void insertarDato(Nodo n)
     {
+      NodoLista nuevo = new NodoLista(n);
 
+      if (cabeza == null)
+      {
+        cabeza = nuevo;
+        cola = nuevo;
+      }
+      else
+      {
+        cola.siguiente = nuevo;
+        nuevo.anterior = cola;
+        cola = nuevo;
+      }
+      size++;
     }
   }
 }

@@ -1,19 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Compi1_Proyecto1
 {
-  class AnalizadorSintactico
+  internal class AnalizadorSintactico
   {
-    LinkedList<Token> salidaSintactico;
+    private LinkedList<Token> salidaSintactico;
     private LinkedList<Token> listaAnalizada;
     private Token actual;
     private int controlToken;
     private String conjunto;
-
 
     public void parser(LinkedList<Token> tokens)
     {
@@ -106,7 +103,7 @@ namespace Compi1_Proyecto1
         }
       }
       Console.WriteLine("--------------------");
-      foreach(Token item in expresionRegular)
+      foreach (Token item in expresionRegular)
       {
         Console.WriteLine(item.getTipo());
       }

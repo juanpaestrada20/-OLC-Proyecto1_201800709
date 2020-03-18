@@ -1,13 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Compi1_Proyecto1
 {
-    class Error
-    {
+  internal class Error
+  {
     private String error;
     private String descripcion;
     private int fila;

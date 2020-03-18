@@ -1,21 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Compi1_Proyecto1
 {
-  class NodoLista
+  internal class NodoLista
   {
-    Nodo nodo;
-    NodoLista siguiente;
+    public Nodo nodo;
+    public NodoLista siguiente;
+    public NodoLista anterior;
 
-    NodoLista(Nodo nodo)
+    public NodoLista(Nodo nodo)
     {
       this.nodo = nodo;
       siguiente = null;
+      anterior = null;
     }
-
   }
 }

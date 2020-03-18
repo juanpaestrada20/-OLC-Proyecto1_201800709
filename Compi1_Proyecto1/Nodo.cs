@@ -2,26 +2,28 @@ using System;
 
 namespace Compi1_Proyecto1
 {
-  class Nodo
+  internal class Nodo
   {
     private String dato;
     private Nodo izquierda;
     private Nodo derecha;
     private String tipo;
     private bool visitado;
+    public int Index;
 
-    public Nodo(String dato, String tipo)
+    public Nodo(int Index, String dato, String tipo)
     {
       this.dato = dato;
       izquierda = null;
       derecha = null;
       this.tipo = tipo;
       visitado = false;
+      this.Index = Index;
     }
 
     public String getDato()
     {
-     return dato;
+      return dato;
     }
 
     public Nodo getIzquierda()
@@ -62,6 +64,11 @@ namespace Compi1_Proyecto1
     public void visitar()
     {
       this.visitado = true;
+    }
+
+    public bool isVisitado()
+    {
+      return visitado;
     }
   }
 }

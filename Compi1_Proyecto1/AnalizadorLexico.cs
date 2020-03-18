@@ -2,13 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Compi1_Proyecto1
 {
-  class AnalizadorLexico
+  internal class AnalizadorLexico
   {
     private LinkedList<Token> salidaTokens;
     private LinkedList<Error> salidaErrores;
@@ -33,7 +31,6 @@ namespace Compi1_Proyecto1
         c = entrada.ElementAt(i);
         switch (estado)
         {
-
           case 0:
             //comentario de una linea
             if (c.CompareTo('/') == 0)
@@ -72,6 +69,12 @@ namespace Compi1_Proyecto1
               auxlex += c;
               columna++;
               agregarToken(Token.Tipo.CERRADURA_KLEENE);
+            }
+            else if (c.CompareTo('+') == 0)
+            {
+              auxlex += c;
+              columna++;
+              agregarToken(Token.Tipo.CERRADURA_POSITIVA);
             }
             else if (c.CompareTo('\n') == 0)
             {
@@ -122,7 +125,7 @@ namespace Compi1_Proyecto1
               agregarToken(Token.Tipo.LLAVE_ABRE);
             }
             //llave cierra
-            else if(c.CompareTo('}') == 0)
+            else if (c.CompareTo('}') == 0)
             {
               auxlex += c;
               columna++;
@@ -176,7 +179,7 @@ namespace Compi1_Proyecto1
               columna++;
               estado = 7;
             }
-            else if((((int)c >= 33) && ((int)c <= 64)) || (((int)c >= 91) && ((int)c <= 96)) )
+            else if ((((int)c >= 33) && ((int)c <= 64)) || (((int)c >= 91) && ((int)c <= 96)))
             {
               auxlex += c;
               columna++;
@@ -225,7 +228,6 @@ namespace Compi1_Proyecto1
               columna++;
               agregarToken(Token.Tipo.INICIO_MULTILINEA);
               estado = 2;
-
             }
             else if (c.CompareTo('!') == 0)
             {
@@ -234,7 +236,7 @@ namespace Compi1_Proyecto1
               auxlex += c;
               i++;
               c = entrada.ElementAt(i);
-              if(c.CompareTo('>') == 0)
+              if (c.CompareTo('>') == 0)
               {
                 auxlex += c;
                 columna++;
@@ -296,6 +298,7 @@ namespace Compi1_Proyecto1
               columna++;
             }
             break;
+
           case 5:
             auxlex += c;
             columna++;
@@ -325,9 +328,9 @@ namespace Compi1_Proyecto1
               fila++;
               columna = 0;
             }
-            else if(c.CompareTo('}') == 0)
+            else if (c.CompareTo('}') == 0)
             {
-              auxlex.Remove(auxlex.Length-1);
+              auxlex.Remove(auxlex.Length - 1);
               agregarToken(Token.Tipo.ID);
               auxlex += c;
               columna++;
@@ -376,6 +379,7 @@ namespace Compi1_Proyecto1
               columna++;
             }
             break;
+
           case 8:
             if (!Char.IsDigit(c))
             {
@@ -483,7 +487,7 @@ namespace Compi1_Proyecto1
     public void imprimirTokens()
     {
       int contador = 1;
-      foreach(Token item in salidaTokens)
+      foreach (Token item in salidaTokens)
       {
         Console.WriteLine(contador + ". " + item.getTipo() + " -> " + item.getValor());
         contador++;
