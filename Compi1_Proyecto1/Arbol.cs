@@ -117,7 +117,7 @@ namespace Compi1_Proyecto1
           if (aux2.getDato().CompareTo("?") == 0)
           {
             contador++;
-            aux2 = disyuncion(aux1, new Nodo(contador, "epsilon", "transicion"));
+            aux2 = disyuncion(aux1, new Nodo(contador, "epsilon", "operando"));
             nodos.Push(aux2);
           }
           else if (aux2.getDato().CompareTo("*") == 0)
@@ -154,7 +154,7 @@ namespace Compi1_Proyecto1
             if (aux3.getDato().CompareTo("?") == 0)
             {
               contador++;
-              aux3 = disyuncion(aux2, new Nodo(contador, "epsilon", "transicion"));
+              aux3 = disyuncion(aux2, new Nodo(contador, "epsilon", "operando"));
               nodos.Push(aux3);
             }
             else if (aux3.getDato().CompareTo("*") == 0)
@@ -304,24 +304,65 @@ namespace Compi1_Proyecto1
     private Nodo disyuncion(Nodo n, Nodo n1)
     {
       contador++;
-
-      Nodo nuevoN = new Nodo(contador, n.getDato(), "transicion");
-      contador++;
-      Nodo nuevoN1 = new Nodo(contador, n1.getDato(), "transicion");
-      contador++;
       Nodo inicio = new Nodo(contador, "epsilon", "transiciones");
-      inicio.setIzquierda(nuevoN);
-      inicio.setDerecha(nuevoN1);
+      Nodo aux1 = n;
+      Nodo aux2 = n1;
+
+      inicio.setIzquierda(aux1);
+      inicio.setDerecha(aux2);
+
       contador++;
       Nodo fin = new Nodo(contador, "", "asignable");
       contador++;
-      Nodo aux1 = new Nodo(contador, "epsilon", "transicion");
+      Nodo aux3 = new Nodo(contador, "epsilon", "transicion");
       contador++;
-      Nodo aux2 = new Nodo(contador, "epsilon", "transicion");
-      nuevoN.setIzquierda(aux1);
-      nuevoN1.setIzquierda(aux2);
-      aux1.setIzquierda(fin);
-      aux2.setIzquierda(fin);
+      Nodo aux4 = new Nodo(contador, "epsilon", "transicion");
+
+      while (aux1.getTipo() != "asignable" && aux1.getTipo() != "operando")
+      {
+        if (aux1.getTipo() == "transiciones")
+        {
+          aux1 = aux1.getDerecha();
+        }
+        else
+        {
+          aux1 = aux1.getIzquierda();
+        }
+      }
+      if (aux1.getTipo() == "operando")
+      {
+        aux1.setTipo("transicion");
+        aux1.setIzquierda(aux3);
+        aux3.setIzquierda(fin);
+      }
+      else if (aux1.getTipo() == "asignable")
+      {
+        aux1.changeNodo(aux3);
+        aux1.setIzquierda(fin);
+      }
+      //
+      while (aux2.getTipo() != "asignable" && aux2.getTipo() != "operando")
+      {
+        if (aux2.getTipo() == "transiciones")
+        {
+          aux2 = aux2.getDerecha();
+        }
+        else
+        {
+          aux2 = aux2.getIzquierda();
+        }
+      }
+      if (aux2.getTipo() == "operando")
+      {
+        aux2.setTipo("transicion");
+        aux2.setIzquierda(aux4);
+        aux4.setIzquierda(fin);
+      }
+      else if (aux2.getTipo() == "asignable")
+      {
+        aux2.changeNodo(aux4);
+        aux2.setIzquierda(fin);
+      }
 
       return inicio;
     }
