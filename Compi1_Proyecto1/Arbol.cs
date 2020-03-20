@@ -9,7 +9,6 @@ namespace Compi1_Proyecto1
   {
     private Nodo raiz;
     private int index;
-    private int i;
     private LinkedList<Token> tokens;
     private Token actual;
     private LinkedList<Nodo> expresion;
@@ -39,7 +38,6 @@ namespace Compi1_Proyecto1
     {
       nodos = new Stack<Nodo>();
       index = 0;
-      i = 0;
       tokens = tok;
       tokens.AddLast(new Token(Token.Tipo.ULTIMO, "#", 0, 0));
       actual = tokens.ElementAt(index);
@@ -129,14 +127,15 @@ namespace Compi1_Proyecto1
           }
           else if (aux2.getDato().CompareTo("+") == 0)
           {
-            aux2 = concatenar(aux1, cerraduraKleene(aux1));
+            Nodo aux = cerraduraKleene(aux1);
+            aux2 = concatenar(aux1, aux);
             nodos.Push(aux2);
           }
         }
-        else if ((aux2.getTipo().CompareTo("operando") == 0) && (aux2.getTipo().CompareTo("operando") == 0))
+        else if ((aux2.getTipo() != "operador") && (aux1.getTipo() != "operador"))
         {
           Nodo aux3 = nodos.Pop();
-          if (aux3.getTipo().CompareTo("operador") == 0)
+          if (aux3.getTipo() == "operador")
           {
             if (aux3.getDato().CompareTo(".") == 0)
             {
@@ -149,6 +148,55 @@ namespace Compi1_Proyecto1
               nodos.Push(aux3);
             }
           }
+          else if (aux3.getTipo().CompareTo("unario") == 0)
+          {
+            pilaAuxilar.Push(aux1);
+            if (aux3.getDato().CompareTo("?") == 0)
+            {
+              contador++;
+              aux3 = disyuncion(aux2, new Nodo(contador, "epsilon", "transicion"));
+              nodos.Push(aux3);
+            }
+            else if (aux3.getDato().CompareTo("*") == 0)
+            {
+              aux3 = cerraduraKleene(aux2);
+              nodos.Push(aux3);
+            }
+            else if (aux3.getDato().CompareTo("+") == 0)
+            {
+              aux3 = concatenar(aux2, cerraduraKleene(aux2));
+              nodos.Push(aux3);
+            }
+          }
+          else if (aux3.getTipo() == "transicion" || aux3.getTipo() == "transiciones" || aux3.getTipo() == "operando")
+          {
+            pilaAuxilar.Push(aux3);
+            while (nodos.Peek().getTipo() != "operador" && nodos.Peek().getTipo() != "unario")
+            {
+              pilaAuxilar.Push(nodos.Pop());
+            }
+            aux3 = nodos.Pop();
+            if (aux3.getDato().CompareTo("?") == 0)
+            {
+              contador++;
+              aux3 = disyuncion(aux1, new Nodo(contador, "epsilon", "transicion"));
+              nodos.Push(aux3);
+            }
+            else if (aux3.getDato().CompareTo("*") == 0)
+            {
+              aux3 = cerraduraKleene(aux1);
+              nodos.Push(aux3);
+            }
+            else if (aux3.getDato().CompareTo("+") == 0)
+            {
+              aux3 = concatenar(aux1, cerraduraKleene(aux1));
+              nodos.Push(aux3);
+            }
+          }
+          while (pilaAuxilar.Count > 0)
+          {
+            nodos.Push(pilaAuxilar.Pop());
+          }
         }
         metodoThompson();
       }
@@ -160,52 +208,162 @@ namespace Compi1_Proyecto1
 
     private Nodo cerraduraKleene(Nodo n)
     {
+      Nodo nuevoN = n;
       contador++;
       Nodo n1 = new Nodo(contador, "epsilon", "transiciones");
+      n1.setIzquierda(nuevoN);
+      if (nuevoN.getTipo() == "transiciones" || nuevoN.getTipo() == "transicion")
+      {
+        while (nuevoN.getTipo() != "asignable")
+        {
+          if (nuevoN.getTipo() == "transiciones")
+          {
+            nuevoN = nuevoN.getDerecha();
+          }
+          else
+          {
+            nuevoN = nuevoN.getIzquierda();
+          }
+        }
+      }
+      else if (nuevoN.getTipo() == "operando")
+      {
+        contador++;
+        nuevoN.Index = contador;
+      }
+
       contador++;
       Nodo n2 = new Nodo(contador, "epsilon", "transiciones");
       contador++;
       Nodo n3 = new Nodo(contador, "", "asignable");
-      n.setTipo("transicion");
-      n1.setIzquierda(n);
+
+      if (nuevoN.getTipo() == "operando")
+      {
+        nuevoN.setTipo("transicion");
+        nuevoN.setIzquierda(n2);
+        n2.setIzquierda(nuevoN);
+        n2.setDerecha(n3);
+      }
+      else if (nuevoN.getTipo() == "asignable")
+      {
+        nuevoN.changeNodo(n2);
+        nuevoN.setIzquierda(n);
+        nuevoN.setDerecha(n3);
+      }
+
       n1.setDerecha(n3);
-      n.setIzquierda(n2);
-      n2.setIzquierda(n);
-      n2.setDerecha(n3);
+
       return n1;
     }
 
     private Nodo concatenar(Nodo n, Nodo n1)
     {
-      n.setIzquierda(n1);
+      Nodo aux1 = n;
+      Nodo aux2 = n1;
+      while (aux1.getTipo() != "asignable" && aux1.getTipo() != "operando")
+      {
+        if (aux1.getTipo() == "transiciones")
+        {
+          aux1 = aux1.getDerecha();
+        }
+        else
+        {
+          aux1 = aux1.getIzquierda();
+        }
+      }
+      if (aux1.getTipo() == "operando")
+      {
+        aux1.setTipo("transicion");
+        aux1.setIzquierda(aux2);
+      }
+      else if (aux1.getTipo() == "asignable")
+      {
+        aux1.changeNodo(aux2);
+      }
       contador++;
       Nodo n2 = new Nodo(contador, "", "asignable");
-      n1.setIzquierda(n2);
-      n.setTipo("transicion");
-      n1.setTipo("transicion");
+      while (aux1.getTipo() != "asignable" && aux1.getTipo() != "operando")
+      {
+        if (aux1.getTipo() == "transiciones")
+        {
+          aux1 = aux1.getDerecha();
+        }
+        else
+        {
+          aux1 = aux1.getIzquierda();
+        }
+      }
+      if (aux1.getTipo() == "operando")
+      {
+        aux1.setTipo("transicion");
+        aux1.setIzquierda(n2);
+      }
       return n;
     }
 
     private Nodo disyuncion(Nodo n, Nodo n1)
     {
       contador++;
+
+      Nodo nuevoN = new Nodo(contador, n.getDato(), "transicion");
+      contador++;
+      Nodo nuevoN1 = new Nodo(contador, n1.getDato(), "transicion");
+      contador++;
       Nodo inicio = new Nodo(contador, "epsilon", "transiciones");
-      inicio.setIzquierda(n);
-      inicio.setDerecha(n1);
+      inicio.setIzquierda(nuevoN);
+      inicio.setDerecha(nuevoN1);
       contador++;
       Nodo fin = new Nodo(contador, "", "asignable");
       contador++;
       Nodo aux1 = new Nodo(contador, "epsilon", "transicion");
       contador++;
       Nodo aux2 = new Nodo(contador, "epsilon", "transicion");
-      n.setIzquierda(aux1);
-      n1.setIzquierda(aux2);
-      n.setTipo("transicion");
-      n1.setTipo("transicion");
+      nuevoN.setIzquierda(aux1);
+      nuevoN1.setIzquierda(aux2);
       aux1.setIzquierda(fin);
       aux2.setIzquierda(fin);
 
       return inicio;
+    }
+
+    private Nodo[] verificados = new Nodo[2];
+
+    private Nodo[] verifyNodes(Nodo n1, Nodo n2)
+    {
+      Nodo aux1 = n1;
+      Nodo aux2 = n2;
+
+      while (aux1.getTipo() != "asignable")
+      {
+        aux2 = n2;
+        while (aux2.getTipo() != "asignable")
+        {
+          if (aux1.Index == aux2.Index)
+          {
+            contador++;
+            aux2.Index = contador;
+          }
+          if (aux2.getTipo() == "transiciones")
+          {
+            aux2 = aux2.getDerecha();
+          }
+          else if (aux2.getTipo() == "transicion")
+          {
+            aux2 = aux2.getIzquierda();
+          }
+        }
+        if (aux1.getTipo() == "transiciones")
+        {
+          aux1 = aux1.getDerecha();
+        }
+        else if (aux1.getTipo() == "transicion")
+        {
+          aux1 = aux1.getIzquierda();
+        }
+      }
+      verificados[0] = aux1;
+      verificados[1] = aux2;
+      return verificados;
     }
 
     private StringBuilder grafo;
@@ -264,8 +422,10 @@ namespace Compi1_Proyecto1
       String comandoDot = "dot.exe -Tpng " + rdot + " -o " + rpng;
       var comando = string.Format(comandoDot);
       var procStart = new System.Diagnostics.ProcessStartInfo("cmd", "/C" + comando);
-      var proc = new System.Diagnostics.Process();
-      proc.StartInfo = procStart;
+      var proc = new System.Diagnostics.Process
+      {
+        StartInfo = procStart
+      };
       proc.Start();
       proc.WaitForExit();
     }

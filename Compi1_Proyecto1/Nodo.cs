@@ -63,12 +63,27 @@ namespace Compi1_Proyecto1
 
     public void visitar()
     {
-      this.visitado = true;
+      visitado = true;
     }
 
     public bool isVisitado()
     {
       return visitado;
+    }
+
+    public void desVisitar()
+    {
+      visitado = false;
+    }
+
+    public void changeNodo(Nodo n)
+    {
+      this.dato = n.getDato();
+      izquierda = n.getIzquierda();
+      derecha = n.getDerecha();
+      this.tipo = n.getTipo();
+      visitado = n.isVisitado();
+      this.Index = n.Index;
     }
   }
 }

@@ -330,7 +330,7 @@ namespace Compi1_Proyecto1
             }
             else if (c.CompareTo('}') == 0)
             {
-              auxlex.Remove(auxlex.Length - 1);
+              auxlex = auxlex.Remove(auxlex.Length - 1);
               agregarToken(Token.Tipo.ID);
               auxlex += c;
               columna++;
