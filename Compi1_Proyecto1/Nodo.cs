@@ -10,6 +10,7 @@ namespace Compi1_Proyecto1
     private String tipo;
     private bool visitado;
     public int Index;
+    public bool clonado;
 
     public Nodo(int Index, String dato, String tipo)
     {
@@ -19,6 +20,7 @@ namespace Compi1_Proyecto1
       this.tipo = tipo;
       visitado = false;
       this.Index = Index;
+      clonado = false;
     }
 
     public String getDato()
@@ -74,6 +76,11 @@ namespace Compi1_Proyecto1
     public void desVisitar()
     {
       visitado = false;
+    }
+
+    public void clonar()
+    {
+      clonado = true;
     }
 
     public void changeNodo(Nodo n)

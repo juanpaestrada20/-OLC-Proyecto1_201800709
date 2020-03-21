@@ -14,6 +14,7 @@ namespace Compi1_Proyecto1
 
     public void parser(LinkedList<Token> tokens)
     {
+      numeroGrafica = 0;
       listaAnalizada = new LinkedList<Token>();
       conjunto = "";
       this.salidaSintactico = tokens;
@@ -21,6 +22,8 @@ namespace Compi1_Proyecto1
       actual = salidaSintactico.ElementAt(controlToken);
       Inicio();
     }
+
+    public static int numeroGrafica;
 
     private void Inicio()
     {
@@ -114,7 +117,8 @@ namespace Compi1_Proyecto1
     private void generarArbol(LinkedList<Token> expresion)
     {
       Arbol arbol = new Arbol();
-      arbol.generarArbol(expresion);
+      numeroGrafica++;
+      arbol.generarArbol(expresion, numeroGrafica);
     }
 
     private void verificarConjunto()

@@ -14,7 +14,6 @@ namespace Compi1_Proyecto1
     private LinkedList<Nodo> expresion;
     private Stack<Nodo> nodos;
     private String ruta;
-    private int numeroGrafica = 0;
     public static int contador = 0;
 
     public Arbol()
@@ -34,8 +33,11 @@ namespace Compi1_Proyecto1
       return raiz;
     }
 
-    public void generarArbol(LinkedList<Token> tok)
+    private int numeroGrafica;
+
+    public void generarArbol(LinkedList<Token> tok, int numeroGrafica)
     {
+      this.numeroGrafica = numeroGrafica;
       nodos = new Stack<Nodo>();
       index = 0;
       tokens = tok;
@@ -127,8 +129,12 @@ namespace Compi1_Proyecto1
           }
           else if (aux2.getDato().CompareTo("+") == 0)
           {
-            Nodo aux = cerraduraKleene(aux1);
-            aux2 = concatenar(aux1, aux);
+            contador++;
+            Nodo nuevo = new Nodo(contador, aux1.getDato(), aux1.getTipo());
+            nuevo.setIzquierda(aux1.getIzquierda());
+            nuevo.setDerecha(aux1.getDerecha());
+            nuevo = changeIndex(nuevo);
+            aux2 = concatenar(aux1, cerraduraKleene(nuevo));
             nodos.Push(aux2);
           }
         }
@@ -164,32 +170,59 @@ namespace Compi1_Proyecto1
             }
             else if (aux3.getDato().CompareTo("+") == 0)
             {
-              aux3 = concatenar(aux2, cerraduraKleene(aux2));
+              Nodo nuevo = new Nodo(contador, aux2.getDato(), aux2.getTipo());
+              nuevo.setIzquierda(aux2.getIzquierda());
+              nuevo.setDerecha(aux2.getDerecha());
+              nuevo = changeIndex(nuevo);
+              aux3 = concatenar(aux2, cerraduraKleene(nuevo));
               nodos.Push(aux3);
             }
           }
           else if (aux3.getTipo() == "transicion" || aux3.getTipo() == "transiciones" || aux3.getTipo() == "operando")
           {
-            pilaAuxilar.Push(aux3);
-            while (nodos.Peek().getTipo() != "operador" && nodos.Peek().getTipo() != "unario")
-            {
-              pilaAuxilar.Push(nodos.Pop());
-            }
+            pilaAuxilar.Push(aux1);
+            aux1 = aux2;
+            aux2 = aux3;
             aux3 = nodos.Pop();
+            while (aux3.getTipo() != "operador" && aux3.getTipo() != "unario")
+            {
+              pilaAuxilar.Push(aux1);
+              aux1 = aux2;
+              aux2 = aux3;
+              aux3 = nodos.Pop();
+            }
+            if (aux3.getTipo() == "unario")
+            {
+              pilaAuxilar.Push(aux1);
+            }
             if (aux3.getDato().CompareTo("?") == 0)
             {
               contador++;
-              aux3 = disyuncion(aux1, new Nodo(contador, "epsilon", "transicion"));
+              aux3 = disyuncion(aux2, new Nodo(contador, "epsilon", "operando"));
               nodos.Push(aux3);
             }
             else if (aux3.getDato().CompareTo("*") == 0)
             {
-              aux3 = cerraduraKleene(aux1);
+              aux3 = cerraduraKleene(aux2);
               nodos.Push(aux3);
             }
             else if (aux3.getDato().CompareTo("+") == 0)
             {
-              aux3 = concatenar(aux1, cerraduraKleene(aux1));
+              Nodo nuevo = new Nodo(contador, aux2.getDato(), aux2.getTipo());
+              nuevo.setIzquierda(aux2.getIzquierda());
+              nuevo.setDerecha(aux2.getDerecha());
+              nuevo = changeIndex(nuevo);
+              aux3 = concatenar(aux2, cerraduraKleene(nuevo));
+              nodos.Push(aux3);
+            }
+            else if (aux3.getDato().CompareTo(".") == 0)
+            {
+              aux3 = concatenar(aux2, aux1);
+              nodos.Push(aux3);
+            }
+            else if (aux3.getDato().CompareTo("|") == 0)
+            {
+              aux3 = disyuncion(aux2, aux1);
               nodos.Push(aux3);
             }
           }
@@ -202,7 +235,14 @@ namespace Compi1_Proyecto1
       }
       else
       {
-        raiz = nodos.Pop();
+        try
+        {
+          raiz = nodos.Pop();
+        }
+        catch (InvalidOperationException e)
+        {
+          Console.WriteLine("error");
+        }
       }
     }
 
@@ -301,6 +341,44 @@ namespace Compi1_Proyecto1
       return n;
     }
 
+    private Nodo changeIndex(Nodo n)
+    {
+      if (n != null)
+      {
+        if (n.getTipo() == "transicion")
+        {
+          contador++;
+          n = clonar(contador, n);
+          n.setIzquierda(changeIndex(n.getIzquierda()));
+        }
+        else if (n.getTipo() == "transiciones")
+        {
+          contador++;
+          n = clonar(contador, n);
+          n.setIzquierda(changeIndex(n.getIzquierda()));
+          n.setDerecha(changeIndex(n.getDerecha()));
+        }
+        else if (n.getTipo() == "asignable")
+        {
+          //if (!n.clonado)
+          //{
+          contador++;
+          n = clonar(contador + 5, n);
+          //}
+        }
+      }
+      return n;
+    }
+
+    public Nodo clonar(int index, Nodo n)
+    {
+      Nodo nuevo = new Nodo(index, n.getDato(), n.getTipo());
+      nuevo.setIzquierda(n.getIzquierda());
+      nuevo.setDerecha(n.getDerecha());
+      nuevo.clonar();
+      return nuevo;
+    }
+
     private Nodo disyuncion(Nodo n, Nodo n1)
     {
       contador++;
@@ -341,6 +419,7 @@ namespace Compi1_Proyecto1
         aux1.setIzquierda(fin);
       }
       //
+
       while (aux2.getTipo() != "asignable" && aux2.getTipo() != "operando")
       {
         if (aux2.getTipo() == "transiciones")
@@ -367,52 +446,11 @@ namespace Compi1_Proyecto1
       return inicio;
     }
 
-    private Nodo[] verificados = new Nodo[2];
-
-    private Nodo[] verifyNodes(Nodo n1, Nodo n2)
-    {
-      Nodo aux1 = n1;
-      Nodo aux2 = n2;
-
-      while (aux1.getTipo() != "asignable")
-      {
-        aux2 = n2;
-        while (aux2.getTipo() != "asignable")
-        {
-          if (aux1.Index == aux2.Index)
-          {
-            contador++;
-            aux2.Index = contador;
-          }
-          if (aux2.getTipo() == "transiciones")
-          {
-            aux2 = aux2.getDerecha();
-          }
-          else if (aux2.getTipo() == "transicion")
-          {
-            aux2 = aux2.getIzquierda();
-          }
-        }
-        if (aux1.getTipo() == "transiciones")
-        {
-          aux1 = aux1.getDerecha();
-        }
-        else if (aux1.getTipo() == "transicion")
-        {
-          aux1 = aux1.getIzquierda();
-        }
-      }
-      verificados[0] = aux1;
-      verificados[1] = aux2;
-      return verificados;
-    }
-
     private StringBuilder grafo;
     public Nodo auxiliaryNode;
 
     private void graficar()
     {
-      numeroGrafica++;
       grafo = new StringBuilder();
       String rdot = ruta + "\\imagen" + numeroGrafica + ".dot";
       String rpng = ruta + "\\imagen" + numeroGrafica + ".png";
