@@ -71,6 +71,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -84,6 +85,45 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\img\navegador.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\img\carpeta.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\img\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\img\expand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\img\fichas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\img\guardar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\img\menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\img\minimize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\img\prueba.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\img\tamano_pequq.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\img\papel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\img\simbolico.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\img\telefono-movil.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
