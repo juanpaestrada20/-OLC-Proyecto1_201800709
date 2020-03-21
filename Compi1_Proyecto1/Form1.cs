@@ -1,34 +1,30 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Compi1_Proyecto1
 {
-    public partial class Form1 : Form
-    {
+  public partial class Form1 : Form
+  {
     private int numPestana = 0;
 
-        public Form1()
-        {
-            InitializeComponent();
-        }
+    public Form1()
+    {
+      InitializeComponent();
+    }
+
     //Funcion al panel de la barra
     [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
     private extern static void ReleaseCapture();
+
     [DllImport("user32.DLL", EntryPoint = "SendMessage")]
     private extern static void SendMessage(IntPtr hwnd, int wsmg, int wparam, int lmaparam);
 
     private void pictureBox1_Click(object sender, EventArgs e)
     {
-      
     }
+
     private void btnMax_Click(object sender, EventArgs e)
     {
       this.WindowState = FormWindowState.Maximized;
@@ -58,6 +54,7 @@ namespace Compi1_Proyecto1
         btnRestore.Visible = false;
       }
     }
+
     private RichTextBox GetRichTextBox()
     {
       RichTextBox rtb = null;
@@ -85,7 +82,6 @@ namespace Compi1_Proyecto1
 
     private void Form1_Load(object sender, EventArgs e)
     {
-
     }
 
     private void btnClose_Click(object sender, EventArgs e)
@@ -127,8 +123,12 @@ namespace Compi1_Proyecto1
     private void pictureBox4_Click(object sender, EventArgs e)
     {
       AnalizadorLexico analizador = new AnalizadorLexico();
+      AnalizadorSintactico sintactico = new AnalizadorSintactico();
       LinkedList<Token> listaTokens = analizador.Escanner(richTextBox1.Text);
-      analizador.imprimirTokens();
+      analizador.agregarUltimo();
+      //analizador.imprimirTokens();
+
+      sintactico.parser(listaTokens);
     }
   }
 }
