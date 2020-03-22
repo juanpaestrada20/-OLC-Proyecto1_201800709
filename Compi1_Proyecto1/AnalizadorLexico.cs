@@ -426,12 +426,28 @@ namespace Compi1_Proyecto1
         using (Stream s = File.Open(rutaTokens, FileMode.OpenOrCreate))
         using (StreamWriter sw = new StreamWriter(s))
         {
+          sw.WriteLine("<?xml version=\"1.0\"?>");
           sw.WriteLine("<ListaTokens>");
           foreach (Token item in salidaTokens)
           {
             sw.WriteLine("<Token>");
             sw.WriteLine("<Nombre>" + item.getTipo() + "</Nombre>");
-            sw.WriteLine("<Valor> \"" + item.getValor() + "\"</Valor>");
+            if (item.getValor() == "<")
+            {
+              sw.WriteLine("<Valor> \"" + item.getTipo() + "\"</Valor>");
+            }
+            else if (item.getValor() == "<!")
+            {
+              sw.WriteLine("<Valor> \"" + item.getTipo() + "\"</Valor>");
+            }
+            else if (item.getValor() == "&")
+            {
+              sw.WriteLine("<Valor> \"" + item.getTipo() + "\"</Valor>");
+            }
+            else
+            {
+              sw.WriteLine("<Valor> \"" + item.getValor() + "\"</Valor>");
+            }
             sw.WriteLine("<Fila>" + item.getFila() + "</Fila>");
             sw.WriteLine("<Columna>" + item.getColumna() + "</Columna>");
             sw.WriteLine("</Token>");
@@ -462,6 +478,8 @@ namespace Compi1_Proyecto1
         using (Stream s = File.Open(rutaErrores, FileMode.OpenOrCreate))
         using (StreamWriter sw = new StreamWriter(s))
         {
+          sw.WriteLine("<?xml version=\"1.0\"?>");
+
           sw.WriteLine("<ListaErrores>");
           foreach (Error item in salidaErrores)
           {

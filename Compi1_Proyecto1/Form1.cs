@@ -88,7 +88,7 @@ namespace Compi1_Proyecto1
 
     private void label12_Click(object sender, EventArgs e)
     {
-      openMistkes();
+      openMistakes();
     }
 
     private void openFile()
@@ -238,16 +238,32 @@ namespace Compi1_Proyecto1
     private void openTokens()
     {
       analizador.generarListaTokens();
-      string rutatokens = ruta + "\\tokens.xml";
-      System.Diagnostics.Process.Start(@ruta);
+      String comandoDot = ruta + "\\tokens.xml";
+      var comando = string.Format(comandoDot);
+      var procStart = new System.Diagnostics.ProcessStartInfo("cmd", "/C" + comando);
+      var proc = new System.Diagnostics.Process();
+      proc.StartInfo = procStart;
+      proc.Start();
+      proc.WaitForExit();
     }
 
-    private void openMistkes()
+    private void openMistakes()
     {
+      analizador.generarListaTokens();
+      String comandoDot = ruta + "\\errores.xml";
+      var comando = string.Format(comandoDot);
+      var procStart = new System.Diagnostics.ProcessStartInfo("cmd", "/C" + comando);
+      var proc = new System.Diagnostics.Process();
+      proc.StartInfo = procStart;
+      proc.Start();
+      proc.WaitForExit();
     }
 
     private void Restart()
     {
+      numPestana = 0;
+      listaTokens.Clear();
+      tabControl2.TabPages.Clear();
     }
 
     private void lblOpenFile_Click(object sender, EventArgs e)
@@ -293,6 +309,21 @@ namespace Compi1_Proyecto1
     private void btnSave_Click(object sender, EventArgs e)
     {
       saveFile();
+    }
+
+    private void btnRestart_Click(object sender, EventArgs e)
+    {
+      Restart();
+    }
+
+    private void btnTokens_Click(object sender, EventArgs e)
+    {
+      openTokens();
+    }
+
+    private void btnErrores_Click(object sender, EventArgs e)
+    {
+      openMistakes();
     }
   }
 }

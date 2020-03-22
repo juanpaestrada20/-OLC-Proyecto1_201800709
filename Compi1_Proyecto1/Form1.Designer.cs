@@ -120,6 +120,7 @@ namespace Compi1_Proyecto1
             this.btnRestart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnRestart.TabIndex = 14;
             this.btnRestart.TabStop = false;
+            this.btnRestart.Click += new System.EventHandler(this.btnRestart_Click);
             // 
             // lblErrores
             // 
@@ -142,6 +143,7 @@ namespace Compi1_Proyecto1
             this.btnErrores.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnErrores.TabIndex = 12;
             this.btnErrores.TabStop = false;
+            this.btnErrores.Click += new System.EventHandler(this.btnErrores_Click);
             // 
             // lblTokens
             // 
@@ -219,6 +221,7 @@ namespace Compi1_Proyecto1
             this.btnTokens.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnTokens.TabIndex = 5;
             this.btnTokens.TabStop = false;
+            this.btnTokens.Click += new System.EventHandler(this.btnTokens_Click);
             // 
             // btnVerify
             // 
@@ -375,7 +378,7 @@ namespace Compi1_Proyecto1
             this.groupBox1.Size = new System.Drawing.Size(625, 493);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Text = "Graficas";
             // 
             // groupBox2
             // 

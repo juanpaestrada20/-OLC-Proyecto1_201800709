@@ -77,13 +77,29 @@ namespace Compi1_Proyecto1
 
     private void EvaluarExpresion()
     {
-      match(Token.Tipo.ID);
-      match(Token.Tipo.DOS_PUNTOS);
-      match(Token.Tipo.COMILLA_DOBLE);
-      match(Token.Tipo.CADENA);
-      match(Token.Tipo.COMILLA_DOBLE);
-      match(Token.Tipo.PUNTO_COMA);
-      EvaluarExpresion();
+      if (actual.getTipoToken() == Token.Tipo.INICIO_COMENTARIO)
+      {
+        match(Token.Tipo.INICIO_COMENTARIO);
+        match(Token.Tipo.COMENTARIO);
+        EvaluarExpresion();
+      }
+      else if (actual.getTipoToken() == Token.Tipo.INICIO_MULTILINEA)
+      {
+        match(Token.Tipo.INICIO_MULTILINEA);
+        match(Token.Tipo.COMENTARIO_MULTILINEA);
+        match(Token.Tipo.FIN_MULTILINEA);
+        EvaluarExpresion();
+      }
+      else if (actual.getTipoToken() == Token.Tipo.ID)
+      {
+        match(Token.Tipo.ID);
+        match(Token.Tipo.DOS_PUNTOS);
+        match(Token.Tipo.COMILLA_DOBLE);
+        match(Token.Tipo.CADENA);
+        match(Token.Tipo.COMILLA_DOBLE);
+        match(Token.Tipo.PUNTO_COMA);
+        EvaluarExpresion();
+      }
     }
 
     private void ExpresionRegular()
@@ -153,7 +169,7 @@ namespace Compi1_Proyecto1
     {
       if (actual.getTipoToken() != tipo)
       {
-        Console.WriteLine("No se esperaba este caracter, se esperaba" + tipo.ToString());
+        Console.WriteLine("No se esperaba este caracter\"" + actual.getTipo() + "\", se esperaba" + tipo.ToString());
       }
       else if (actual.getTipoToken() != Token.Tipo.ULTIMO)
       {
