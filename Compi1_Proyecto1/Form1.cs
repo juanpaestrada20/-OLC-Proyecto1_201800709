@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -66,17 +67,12 @@ namespace Compi1_Proyecto1
 
     private void pictureBox4_Click(object sender, EventArgs e)
     {
-      AnalizadorLexico analizador = new AnalizadorLexico();
-      AnalizadorSintactico sintactico = new AnalizadorSintactico();
-      LinkedList<Token> listaTokens = analizador.Escanner("hola");
-      analizador.agregarUltimo();
-      //analizador.imprimirTokens();
-
-      sintactico.parser(listaTokens);
+      Start();
     }
 
     private void label7_Click(object sender, EventArgs e)
     {
+      saveFile();
     }
 
     private void BarraTop_MouseDown(object sender, MouseEventArgs e)
@@ -92,26 +88,158 @@ namespace Compi1_Proyecto1
 
     private void label12_Click(object sender, EventArgs e)
     {
+      openMistkes();
     }
 
     private void openFile()
     {
+      if (tabControl2.TabCount == 0)
+      {
+        numPestana++;
+        TabPage pestana = new TabPage("Pestaña " + numPestana);
+        RichTextBox richtxt = new RichTextBox();
+        richtxt.Dock = DockStyle.Fill;
+
+        pestana.Controls.Add(richtxt);
+        tabControl2.TabPages.Add(pestana);
+      }
+      try
+      {
+        Stream stream;
+        OpenFileDialog dialogo = new OpenFileDialog();
+        dialogo.Title = "Seleccione archivo";
+        dialogo.Filter = "(*.er)|*.er";
+        if (dialogo.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+        {
+          if ((stream = dialogo.OpenFile()) != null)
+          {
+            string texto = File.ReadAllText(dialogo.FileName);
+            GetRichTextBox().Text = texto;
+            tabControl2.TabPages[tabControl2.TabCount - 1].Text = dialogo.FileName.Substring(dialogo.FileName.LastIndexOf("\\") + 1);
+            stream.Close();
+          }
+          else
+          {
+            MessageBox.Show("El archivo no es compatible", "Error de archivo");
+          }
+        }
+      }
+      catch (FileNotFoundException)
+      {
+        throw;
+      }
+      catch (IOException ex)
+      {
+        if (ex.Source != null)
+          Console.WriteLine("IOException source: {0}", ex.Source);
+        throw;
+      }
     }
 
     private void saveFile()
     {
+      try
+      {
+        if (tabControl2.TabCount == 0)
+        {
+          MessageBox.Show("No hay ningun archivo para guardar", "Error al guardar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        else
+        {
+          SaveFileDialog guardar = new SaveFileDialog();
+          guardar.Title = "Guardar archivo como";
+          guardar.Filter = "(*.er)|*.er";
+          if (guardar.ShowDialog() == DialogResult.OK)
+          {
+            using (Stream s = File.Open(guardar.FileName, FileMode.CreateNew))
+            using (StreamWriter sw = new StreamWriter(s))
+            {
+              sw.Write(GetRichTextBox().Text);
+              tabControl2.TabPages[tabControl2.SelectedIndex].Text = guardar.FileName.Substring(guardar.FileName.LastIndexOf("\\") + 1);
+              sw.Flush();
+              sw.Close();
+            }
+          }
+        }
+      }
+      catch (IOException)
+      {
+        throw;
+      }
     }
 
     private void newTab()
     {
+      numPestana++;
+
+      TabPage pestana = new TabPage("Pestaña " + numPestana);
+      RichTextBox richtxt = new RichTextBox();
+      richtxt.Dock = DockStyle.Fill;
+
+      pestana.Controls.Add(richtxt);
+      tabControl2.TabPages.Add(pestana);
     }
 
+    private RichTextBox GetRichTextBox()
+    {
+      RichTextBox rtb = null;
+      TabPage tp = tabControl2.SelectedTab;
+
+      if (tp != null)
+      {
+        rtb = tp.Controls[0] as RichTextBox;
+      }
+
+      return rtb;
+    }
+
+    private LinkedList<Token> listaTokens;
+    private AnalizadorLexico analizador;
+    private AnalizadorSintactico sintactico;
+
     private void Start()
+    {
+      //analizador.imprimirTokens();
+
+      if (tabControl2.TabPages.Count == 0)
+      {
+        MessageBox.Show("No hay ninguna pestaña para analizar", "Analisis no realizado");
+      }
+      else
+      {
+        foreach (Control item in this.tabControl2.SelectedTab.Controls)
+        {
+          Boolean pestanaAnalizar = typeof(RichTextBox).IsInstanceOfType(item);
+          if (pestanaAnalizar == true)
+          {
+            String entrada = GetRichTextBox().Text;
+            analizador = new AnalizadorLexico();
+            sintactico = new AnalizadorSintactico();
+            listaTokens = analizador.Escanner(entrada);
+            analizador.agregarUltimo();
+            if (analizador.getErrores().Count == 0)
+            {
+              MessageBox.Show("Analisis Finalizado\nNo se han encontrado errores", "Analisis Completado");
+              sintactico.parser(listaTokens);
+            }
+            else
+            {
+              MessageBox.Show("\tAnalisis Finalizado\nSe han encontrado errores léxicos", "Analisis Completado");
+            }
+          }
+        }
+      }
+    }
+
+    private void verifyLexemas()
     {
     }
 
     private void openTokens()
     {
+      analizador.generarListaTokens();
+      string rutatokens = ruta + "\\tokens.xml";
+      System.Diagnostics.Process.Start(@ruta);
     }
 
     private void openMistkes()
@@ -120,6 +248,51 @@ namespace Compi1_Proyecto1
 
     private void Restart()
     {
+    }
+
+    private void lblOpenFile_Click(object sender, EventArgs e)
+    {
+      openFile();
+    }
+
+    private void lblTab_Click(object sender, EventArgs e)
+    {
+      newTab();
+    }
+
+    private void lblStart_Click(object sender, EventArgs e)
+    {
+      Start();
+    }
+
+    private void lblVerify_Click(object sender, EventArgs e)
+    {
+      verifyLexemas();
+    }
+
+    private void lblTokens_Click(object sender, EventArgs e)
+    {
+      openTokens();
+    }
+
+    private void lblRestart_Click(object sender, EventArgs e)
+    {
+      Restart();
+    }
+
+    private void btnTab_Click(object sender, EventArgs e)
+    {
+      newTab();
+    }
+
+    private void btnOpenFile_Click(object sender, EventArgs e)
+    {
+      openFile();
+    }
+
+    private void btnSave_Click(object sender, EventArgs e)
+    {
+      saveFile();
     }
   }
 }

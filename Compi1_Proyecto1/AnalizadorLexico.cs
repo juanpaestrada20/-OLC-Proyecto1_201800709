@@ -412,11 +412,16 @@ namespace Compi1_Proyecto1
       estado = 0;
     }
 
+    public LinkedList<Error> getErrores()
+    {
+      return salidaErrores;
+    }
+
     public void generarListaTokens()
     {
       try
       {
-        MessageBox.Show("HTML errores ha sido creado", "HTML creado");
+        MessageBox.Show("XML de tokens ha sido creado", "XML creado");
 
         using (Stream s = File.Open(rutaTokens, FileMode.OpenOrCreate))
         using (StreamWriter sw = new StreamWriter(s))
@@ -452,7 +457,7 @@ namespace Compi1_Proyecto1
     {
       try
       {
-        MessageBox.Show("HTML errores ha sido creado", "HTML creado");
+        MessageBox.Show("XML de errores ha sido creado", "XML creado");
 
         using (Stream s = File.Open(rutaErrores, FileMode.OpenOrCreate))
         using (StreamWriter sw = new StreamWriter(s))

@@ -30,36 +30,34 @@ namespace Compi1_Proyecto1
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.Menu = new System.Windows.Forms.Panel();
-            this.BarraTop = new System.Windows.Forms.Panel();
-            this.Container = new System.Windows.Forms.Panel();
-            this.lblOpenFile = new System.Windows.Forms.Label();
-            this.lblSave = new System.Windows.Forms.Label();
-            this.lblTab = new System.Windows.Forms.Label();
-            this.lblStart = new System.Windows.Forms.Label();
-            this.lblVerify = new System.Windows.Forms.Label();
-            this.lblTokens = new System.Windows.Forms.Label();
+            this.lblRestart = new System.Windows.Forms.Label();
+            this.btnRestart = new System.Windows.Forms.PictureBox();
             this.lblErrores = new System.Windows.Forms.Label();
-            this.btnMenuHide = new System.Windows.Forms.PictureBox();
-            this.btnMinimize = new System.Windows.Forms.PictureBox();
-            this.btnNormalSize = new System.Windows.Forms.PictureBox();
-            this.btnMaximize = new System.Windows.Forms.PictureBox();
-            this.btnClose = new System.Windows.Forms.PictureBox();
             this.btnErrores = new System.Windows.Forms.PictureBox();
+            this.lblTokens = new System.Windows.Forms.Label();
+            this.lblVerify = new System.Windows.Forms.Label();
+            this.lblStart = new System.Windows.Forms.Label();
+            this.lblTab = new System.Windows.Forms.Label();
+            this.lblSave = new System.Windows.Forms.Label();
+            this.lblOpenFile = new System.Windows.Forms.Label();
             this.btnTokens = new System.Windows.Forms.PictureBox();
             this.btnVerify = new System.Windows.Forms.PictureBox();
             this.btnStart = new System.Windows.Forms.PictureBox();
             this.btnTab = new System.Windows.Forms.PictureBox();
             this.btnSave = new System.Windows.Forms.PictureBox();
             this.btnOpenFile = new System.Windows.Forms.PictureBox();
-            this.btnRestart = new System.Windows.Forms.PictureBox();
-            this.lblRestart = new System.Windows.Forms.Label();
+            this.BarraTop = new System.Windows.Forms.Panel();
+            this.btnMenuHide = new System.Windows.Forms.PictureBox();
+            this.btnMinimize = new System.Windows.Forms.PictureBox();
+            this.btnNormalSize = new System.Windows.Forms.PictureBox();
+            this.btnMaximize = new System.Windows.Forms.PictureBox();
+            this.btnClose = new System.Windows.Forms.PictureBox();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.Menu.SuspendLayout();
-            this.BarraTop.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnMenuHide)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnMinimize)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnNormalSize)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnMaximize)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnRestart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnErrores)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnTokens)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnVerify)).BeginInit();
@@ -67,7 +65,12 @@ namespace Compi1_Proyecto1
             ((System.ComponentModel.ISupportInitialize)(this.btnTab)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSave)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnOpenFile)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnRestart)).BeginInit();
+            this.BarraTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnMenuHide)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnMinimize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnNormalSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnMaximize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
             this.SuspendLayout();
             // 
             // Menu
@@ -93,92 +96,30 @@ namespace Compi1_Proyecto1
             this.Menu.Dock = System.Windows.Forms.DockStyle.Left;
             this.Menu.Location = new System.Drawing.Point(0, 0);
             this.Menu.Name = "Menu";
-            this.Menu.Size = new System.Drawing.Size(300, 800);
+            this.Menu.Size = new System.Drawing.Size(82, 800);
             this.Menu.TabIndex = 0;
             // 
-            // BarraTop
+            // lblRestart
             // 
-            this.BarraTop.BackColor = System.Drawing.Color.RoyalBlue;
-            this.BarraTop.Controls.Add(this.btnMenuHide);
-            this.BarraTop.Controls.Add(this.btnMinimize);
-            this.BarraTop.Controls.Add(this.btnNormalSize);
-            this.BarraTop.Controls.Add(this.btnMaximize);
-            this.BarraTop.Controls.Add(this.btnClose);
-            this.BarraTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BarraTop.Location = new System.Drawing.Point(300, 0);
-            this.BarraTop.Name = "BarraTop";
-            this.BarraTop.Size = new System.Drawing.Size(900, 60);
-            this.BarraTop.TabIndex = 1;
-            this.BarraTop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BarraTop_MouseDown);
+            this.lblRestart.AutoSize = true;
+            this.lblRestart.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRestart.Location = new System.Drawing.Point(78, 569);
+            this.lblRestart.Name = "lblRestart";
+            this.lblRestart.Size = new System.Drawing.Size(154, 24);
+            this.lblRestart.TabIndex = 15;
+            this.lblRestart.Text = "Limpiar Todo";
+            this.lblRestart.Click += new System.EventHandler(this.lblRestart_Click);
             // 
-            // Container
+            // btnRestart
             // 
-            this.Container.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Container.Location = new System.Drawing.Point(300, 60);
-            this.Container.Name = "Container";
-            this.Container.Size = new System.Drawing.Size(900, 740);
-            this.Container.TabIndex = 2;
-            // 
-            // lblOpenFile
-            // 
-            this.lblOpenFile.AutoSize = true;
-            this.lblOpenFile.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOpenFile.Location = new System.Drawing.Point(78, 36);
-            this.lblOpenFile.Name = "lblOpenFile";
-            this.lblOpenFile.Size = new System.Drawing.Size(166, 24);
-            this.lblOpenFile.TabIndex = 6;
-            this.lblOpenFile.Text = "Abrir Archivo";
-            // 
-            // lblSave
-            // 
-            this.lblSave.AutoSize = true;
-            this.lblSave.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSave.Location = new System.Drawing.Point(78, 114);
-            this.lblSave.Name = "lblSave";
-            this.lblSave.Size = new System.Drawing.Size(190, 24);
-            this.lblSave.TabIndex = 7;
-            this.lblSave.Text = "Guardar Archivo";
-            this.lblSave.Click += new System.EventHandler(this.label7_Click);
-            // 
-            // lblTab
-            // 
-            this.lblTab.AutoSize = true;
-            this.lblTab.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTab.Location = new System.Drawing.Point(78, 187);
-            this.lblTab.Name = "lblTab";
-            this.lblTab.Size = new System.Drawing.Size(166, 24);
-            this.lblTab.TabIndex = 8;
-            this.lblTab.Text = "Nueva Pestaña";
-            // 
-            // lblStart
-            // 
-            this.lblStart.AutoSize = true;
-            this.lblStart.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStart.Location = new System.Drawing.Point(78, 263);
-            this.lblStart.Name = "lblStart";
-            this.lblStart.Size = new System.Drawing.Size(214, 24);
-            this.lblStart.TabIndex = 9;
-            this.lblStart.Text = "Generar Automatas";
-            // 
-            // lblVerify
-            // 
-            this.lblVerify.AutoSize = true;
-            this.lblVerify.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVerify.Location = new System.Drawing.Point(78, 339);
-            this.lblVerify.Name = "lblVerify";
-            this.lblVerify.Size = new System.Drawing.Size(214, 24);
-            this.lblVerify.TabIndex = 10;
-            this.lblVerify.Text = "Verificar Lexemas";
-            // 
-            // lblTokens
-            // 
-            this.lblTokens.AutoSize = true;
-            this.lblTokens.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTokens.Location = new System.Drawing.Point(78, 414);
-            this.lblTokens.Name = "lblTokens";
-            this.lblTokens.Size = new System.Drawing.Size(130, 24);
-            this.lblTokens.TabIndex = 11;
-            this.lblTokens.Text = "Ver Tokens";
+            this.btnRestart.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRestart.Image = global::Compi1_Proyecto1.Properties.Resources.telefono_movil;
+            this.btnRestart.Location = new System.Drawing.Point(12, 551);
+            this.btnRestart.Name = "btnRestart";
+            this.btnRestart.Size = new System.Drawing.Size(60, 60);
+            this.btnRestart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnRestart.TabIndex = 14;
+            this.btnRestart.TabStop = false;
             // 
             // lblErrores
             // 
@@ -191,71 +132,6 @@ namespace Compi1_Proyecto1
             this.lblErrores.Text = "Ver Errores";
             this.lblErrores.Click += new System.EventHandler(this.label12_Click);
             // 
-            // btnMenuHide
-            // 
-            this.btnMenuHide.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMenuHide.Image = global::Compi1_Proyecto1.Properties.Resources.menu;
-            this.btnMenuHide.Location = new System.Drawing.Point(6, 4);
-            this.btnMenuHide.Name = "btnMenuHide";
-            this.btnMenuHide.Size = new System.Drawing.Size(50, 50);
-            this.btnMenuHide.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnMenuHide.TabIndex = 4;
-            this.btnMenuHide.TabStop = false;
-            this.btnMenuHide.Click += new System.EventHandler(this.btnMenuHide_Click);
-            // 
-            // btnMinimize
-            // 
-            this.btnMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMinimize.Image = global::Compi1_Proyecto1.Properties.Resources.minimize;
-            this.btnMinimize.Location = new System.Drawing.Point(816, 12);
-            this.btnMinimize.Name = "btnMinimize";
-            this.btnMinimize.Size = new System.Drawing.Size(20, 20);
-            this.btnMinimize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnMinimize.TabIndex = 3;
-            this.btnMinimize.TabStop = false;
-            this.btnMinimize.Click += new System.EventHandler(this.btnMinimize_Click);
-            // 
-            // btnNormalSize
-            // 
-            this.btnNormalSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNormalSize.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnNormalSize.Image = global::Compi1_Proyecto1.Properties.Resources.tamano_pequq;
-            this.btnNormalSize.Location = new System.Drawing.Point(842, 12);
-            this.btnNormalSize.Name = "btnNormalSize";
-            this.btnNormalSize.Size = new System.Drawing.Size(20, 20);
-            this.btnNormalSize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnNormalSize.TabIndex = 2;
-            this.btnNormalSize.TabStop = false;
-            this.btnNormalSize.Visible = false;
-            this.btnNormalSize.Click += new System.EventHandler(this.btnNormalSize_Click);
-            // 
-            // btnMaximize
-            // 
-            this.btnMaximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMaximize.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMaximize.Image = global::Compi1_Proyecto1.Properties.Resources.expand;
-            this.btnMaximize.Location = new System.Drawing.Point(842, 12);
-            this.btnMaximize.Name = "btnMaximize";
-            this.btnMaximize.Size = new System.Drawing.Size(20, 20);
-            this.btnMaximize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnMaximize.TabIndex = 1;
-            this.btnMaximize.TabStop = false;
-            this.btnMaximize.Click += new System.EventHandler(this.btnMaximize_Click);
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClose.Image = global::Compi1_Proyecto1.Properties.Resources.close;
-            this.btnClose.Location = new System.Drawing.Point(868, 12);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(20, 20);
-            this.btnClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnClose.TabIndex = 0;
-            this.btnClose.TabStop = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
             // btnErrores
             // 
             this.btnErrores.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -266,6 +142,72 @@ namespace Compi1_Proyecto1
             this.btnErrores.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnErrores.TabIndex = 12;
             this.btnErrores.TabStop = false;
+            // 
+            // lblTokens
+            // 
+            this.lblTokens.AutoSize = true;
+            this.lblTokens.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTokens.Location = new System.Drawing.Point(78, 414);
+            this.lblTokens.Name = "lblTokens";
+            this.lblTokens.Size = new System.Drawing.Size(130, 24);
+            this.lblTokens.TabIndex = 11;
+            this.lblTokens.Text = "Ver Tokens";
+            this.lblTokens.Click += new System.EventHandler(this.lblTokens_Click);
+            // 
+            // lblVerify
+            // 
+            this.lblVerify.AutoSize = true;
+            this.lblVerify.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVerify.Location = new System.Drawing.Point(78, 339);
+            this.lblVerify.Name = "lblVerify";
+            this.lblVerify.Size = new System.Drawing.Size(214, 24);
+            this.lblVerify.TabIndex = 10;
+            this.lblVerify.Text = "Verificar Lexemas";
+            this.lblVerify.Click += new System.EventHandler(this.lblVerify_Click);
+            // 
+            // lblStart
+            // 
+            this.lblStart.AutoSize = true;
+            this.lblStart.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStart.Location = new System.Drawing.Point(78, 263);
+            this.lblStart.Name = "lblStart";
+            this.lblStart.Size = new System.Drawing.Size(214, 24);
+            this.lblStart.TabIndex = 9;
+            this.lblStart.Text = "Generar Automatas";
+            this.lblStart.Click += new System.EventHandler(this.lblStart_Click);
+            // 
+            // lblTab
+            // 
+            this.lblTab.AutoSize = true;
+            this.lblTab.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTab.Location = new System.Drawing.Point(78, 187);
+            this.lblTab.Name = "lblTab";
+            this.lblTab.Size = new System.Drawing.Size(166, 24);
+            this.lblTab.TabIndex = 8;
+            this.lblTab.Text = "Nueva Pestaña";
+            this.lblTab.Click += new System.EventHandler(this.lblTab_Click);
+            // 
+            // lblSave
+            // 
+            this.lblSave.AutoSize = true;
+            this.lblSave.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSave.Location = new System.Drawing.Point(78, 114);
+            this.lblSave.Name = "lblSave";
+            this.lblSave.Size = new System.Drawing.Size(190, 24);
+            this.lblSave.TabIndex = 7;
+            this.lblSave.Text = "Guardar Archivo";
+            this.lblSave.Click += new System.EventHandler(this.label7_Click);
+            // 
+            // lblOpenFile
+            // 
+            this.lblOpenFile.AutoSize = true;
+            this.lblOpenFile.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOpenFile.Location = new System.Drawing.Point(78, 36);
+            this.lblOpenFile.Name = "lblOpenFile";
+            this.lblOpenFile.Size = new System.Drawing.Size(166, 24);
+            this.lblOpenFile.TabIndex = 6;
+            this.lblOpenFile.Text = "Abrir Archivo";
+            this.lblOpenFile.Click += new System.EventHandler(this.lblOpenFile_Click);
             // 
             // btnTokens
             // 
@@ -311,6 +253,7 @@ namespace Compi1_Proyecto1
             this.btnTab.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnTab.TabIndex = 2;
             this.btnTab.TabStop = false;
+            this.btnTab.Click += new System.EventHandler(this.btnTab_Click);
             // 
             // btnSave
             // 
@@ -322,6 +265,7 @@ namespace Compi1_Proyecto1
             this.btnSave.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnSave.TabIndex = 1;
             this.btnSave.TabStop = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnOpenFile
             // 
@@ -333,35 +277,136 @@ namespace Compi1_Proyecto1
             this.btnOpenFile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnOpenFile.TabIndex = 0;
             this.btnOpenFile.TabStop = false;
+            this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
             // 
-            // btnRestart
+            // BarraTop
             // 
-            this.btnRestart.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRestart.Image = global::Compi1_Proyecto1.Properties.Resources.telefono_movil;
-            this.btnRestart.Location = new System.Drawing.Point(12, 551);
-            this.btnRestart.Name = "btnRestart";
-            this.btnRestart.Size = new System.Drawing.Size(60, 60);
-            this.btnRestart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnRestart.TabIndex = 14;
-            this.btnRestart.TabStop = false;
+            this.BarraTop.BackColor = System.Drawing.Color.RoyalBlue;
+            this.BarraTop.Controls.Add(this.btnMenuHide);
+            this.BarraTop.Controls.Add(this.btnMinimize);
+            this.BarraTop.Controls.Add(this.btnNormalSize);
+            this.BarraTop.Controls.Add(this.btnMaximize);
+            this.BarraTop.Controls.Add(this.btnClose);
+            this.BarraTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BarraTop.Location = new System.Drawing.Point(82, 0);
+            this.BarraTop.Name = "BarraTop";
+            this.BarraTop.Size = new System.Drawing.Size(1118, 60);
+            this.BarraTop.TabIndex = 1;
+            this.BarraTop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BarraTop_MouseDown);
             // 
-            // lblRestart
+            // btnMenuHide
             // 
-            this.lblRestart.AutoSize = true;
-            this.lblRestart.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRestart.Location = new System.Drawing.Point(78, 569);
-            this.lblRestart.Name = "lblRestart";
-            this.lblRestart.Size = new System.Drawing.Size(154, 24);
-            this.lblRestart.TabIndex = 15;
-            this.lblRestart.Text = "Limpiar Todo";
+            this.btnMenuHide.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMenuHide.Image = global::Compi1_Proyecto1.Properties.Resources.menu;
+            this.btnMenuHide.Location = new System.Drawing.Point(6, 4);
+            this.btnMenuHide.Name = "btnMenuHide";
+            this.btnMenuHide.Size = new System.Drawing.Size(50, 50);
+            this.btnMenuHide.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnMenuHide.TabIndex = 4;
+            this.btnMenuHide.TabStop = false;
+            this.btnMenuHide.Click += new System.EventHandler(this.btnMenuHide_Click);
+            // 
+            // btnMinimize
+            // 
+            this.btnMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMinimize.Image = global::Compi1_Proyecto1.Properties.Resources.minimize;
+            this.btnMinimize.Location = new System.Drawing.Point(1034, 12);
+            this.btnMinimize.Name = "btnMinimize";
+            this.btnMinimize.Size = new System.Drawing.Size(20, 20);
+            this.btnMinimize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnMinimize.TabIndex = 3;
+            this.btnMinimize.TabStop = false;
+            this.btnMinimize.Click += new System.EventHandler(this.btnMinimize_Click);
+            // 
+            // btnNormalSize
+            // 
+            this.btnNormalSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNormalSize.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNormalSize.Image = global::Compi1_Proyecto1.Properties.Resources.tamano_pequq;
+            this.btnNormalSize.Location = new System.Drawing.Point(1060, 12);
+            this.btnNormalSize.Name = "btnNormalSize";
+            this.btnNormalSize.Size = new System.Drawing.Size(20, 20);
+            this.btnNormalSize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnNormalSize.TabIndex = 2;
+            this.btnNormalSize.TabStop = false;
+            this.btnNormalSize.Visible = false;
+            this.btnNormalSize.Click += new System.EventHandler(this.btnNormalSize_Click);
+            // 
+            // btnMaximize
+            // 
+            this.btnMaximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMaximize.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMaximize.Image = global::Compi1_Proyecto1.Properties.Resources.expand;
+            this.btnMaximize.Location = new System.Drawing.Point(1060, 12);
+            this.btnMaximize.Name = "btnMaximize";
+            this.btnMaximize.Size = new System.Drawing.Size(20, 20);
+            this.btnMaximize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnMaximize.TabIndex = 1;
+            this.btnMaximize.TabStop = false;
+            this.btnMaximize.Click += new System.EventHandler(this.btnMaximize_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClose.Image = global::Compi1_Proyecto1.Properties.Resources.close;
+            this.btnClose.Location = new System.Drawing.Point(1086, 12);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(20, 20);
+            this.btnClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnClose.TabIndex = 0;
+            this.btnClose.TabStop = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // tabControl2
+            // 
+            this.tabControl2.Location = new System.Drawing.Point(88, 73);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(452, 493);
+            this.tabControl2.TabIndex = 2;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Location = new System.Drawing.Point(563, 73);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(625, 493);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "groupBox1";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox2.Location = new System.Drawing.Point(88, 581);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(452, 198);
+            this.groupBox2.TabIndex = 4;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "groupBox2";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Location = new System.Drawing.Point(563, 581);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(625, 198);
+            this.groupBox3.TabIndex = 5;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "groupBox3";
             // 
             // Form1
             // 
             this.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.ClientSize = new System.Drawing.Size(1200, 800);
-            this.Controls.Add(this.Container);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.BarraTop);
             this.Controls.Add(this.Menu);
+            this.Controls.Add(this.tabControl2);
+            this.Controls.Add(this.groupBox2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
@@ -369,12 +414,7 @@ namespace Compi1_Proyecto1
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Menu.ResumeLayout(false);
             this.Menu.PerformLayout();
-            this.BarraTop.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.btnMenuHide)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnMinimize)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnNormalSize)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnMaximize)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnRestart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnErrores)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnTokens)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnVerify)).EndInit();
@@ -382,7 +422,12 @@ namespace Compi1_Proyecto1
             ((System.ComponentModel.ISupportInitialize)(this.btnTab)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnSave)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnOpenFile)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnRestart)).EndInit();
+            this.BarraTop.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.btnMenuHide)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnMinimize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnNormalSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnMaximize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -412,7 +457,6 @@ namespace Compi1_Proyecto1
     private System.Windows.Forms.TabControl tabControl1;
     private System.Windows.Forms.Panel Menu;
     private System.Windows.Forms.Panel BarraTop;
-    private System.Windows.Forms.Panel Container;
     private System.Windows.Forms.PictureBox btnMinimize;
     private System.Windows.Forms.PictureBox btnNormalSize;
     private System.Windows.Forms.PictureBox btnMaximize;
@@ -434,6 +478,10 @@ namespace Compi1_Proyecto1
     private System.Windows.Forms.Label lblTab;
     private System.Windows.Forms.Label lblRestart;
     private System.Windows.Forms.PictureBox btnRestart;
+    private System.Windows.Forms.TabControl tabControl2;
+    private System.Windows.Forms.GroupBox groupBox1;
+    private System.Windows.Forms.GroupBox groupBox2;
+    private System.Windows.Forms.GroupBox groupBox3;
   }
 }
 
