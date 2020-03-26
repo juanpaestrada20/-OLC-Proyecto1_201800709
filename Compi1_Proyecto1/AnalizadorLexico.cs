@@ -255,6 +255,20 @@ namespace Compi1_Proyecto1
               columna++;
               agregarToken(Token.Tipo.CONJUNTO);
             }
+            else if (c.CompareTo('>') == 0 && auxlex.Contains(",") && salidaTokens.Last().getTipoToken() != Token.Tipo.INICIO_MULTILINEA)
+            {
+              agregarToken(Token.Tipo.COMA);
+              auxlex += c;
+              columna++;
+              agregarToken(Token.Tipo.CARACTER);
+            }
+            else if (c.CompareTo(',') == 0)
+            {
+              agregarToken(Token.Tipo.CARACTER);
+              auxlex += c;
+              columna++;
+              agregarToken(Token.Tipo.COMA);
+            }
             else
             {
               auxlex += c;
@@ -347,9 +361,8 @@ namespace Compi1_Proyecto1
             }
             else
             {
-              auxlex += c;
-              columna++;
               agregarToken(Token.Tipo.CARACTER);
+              i--;
             }
             break;
           //dentro de llaves
@@ -412,21 +425,42 @@ namespace Compi1_Proyecto1
       estado = 0;
     }
 
+    public LinkedList<Error> getErrores()
+    {
+      return salidaErrores;
+    }
+
     public void generarListaTokens()
     {
       try
       {
-        MessageBox.Show("HTML errores ha sido creado", "HTML creado");
+        MessageBox.Show("XML de tokens ha sido creado", "XML creado");
 
         using (Stream s = File.Open(rutaTokens, FileMode.OpenOrCreate))
         using (StreamWriter sw = new StreamWriter(s))
         {
+          sw.WriteLine("<?xml version=\"1.0\"?>");
           sw.WriteLine("<ListaTokens>");
           foreach (Token item in salidaTokens)
           {
             sw.WriteLine("<Token>");
             sw.WriteLine("<Nombre>" + item.getTipo() + "</Nombre>");
-            sw.WriteLine("<Valor> \"" + item.getValor() + "\"</Valor>");
+            if (item.getValor() == "<")
+            {
+              sw.WriteLine("<Valor> \"" + item.getTipo() + "\"</Valor>");
+            }
+            else if (item.getValor() == "<!")
+            {
+              sw.WriteLine("<Valor> \"" + item.getTipo() + "\"</Valor>");
+            }
+            else if (item.getValor() == "&")
+            {
+              sw.WriteLine("<Valor> \"" + item.getTipo() + "\"</Valor>");
+            }
+            else
+            {
+              sw.WriteLine("<Valor> \"" + item.getValor() + "\"</Valor>");
+            }
             sw.WriteLine("<Fila>" + item.getFila() + "</Fila>");
             sw.WriteLine("<Columna>" + item.getColumna() + "</Columna>");
             sw.WriteLine("</Token>");
@@ -452,11 +486,13 @@ namespace Compi1_Proyecto1
     {
       try
       {
-        MessageBox.Show("HTML errores ha sido creado", "HTML creado");
+        MessageBox.Show("XML de errores ha sido creado", "XML creado");
 
         using (Stream s = File.Open(rutaErrores, FileMode.OpenOrCreate))
         using (StreamWriter sw = new StreamWriter(s))
         {
+          sw.WriteLine("<?xml version=\"1.0\"?>");
+
           sw.WriteLine("<ListaErrores>");
           foreach (Error item in salidaErrores)
           {

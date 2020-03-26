@@ -11,6 +11,7 @@ namespace Compi1_Proyecto1
     private bool visitado;
     public int Index;
     public bool clonado;
+    public bool visitaThompson;
 
     public Nodo(int Index, String dato, String tipo)
     {
@@ -21,6 +22,7 @@ namespace Compi1_Proyecto1
       visitado = false;
       this.Index = Index;
       clonado = false;
+      visitaThompson = false;
     }
 
     public String getDato()
