@@ -63,6 +63,7 @@ namespace Compi1_Proyecto1
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.label6 = new System.Windows.Forms.Label();
             this.cbxAFN = new System.Windows.Forms.ComboBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.Menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnRestart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnErrores)).BeginInit();
@@ -81,6 +82,7 @@ namespace Compi1_Proyecto1
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imagen)).BeginInit();
             this.Seleccion.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // Menu
@@ -384,20 +386,21 @@ namespace Compi1_Proyecto1
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.imagen);
+            this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Location = new System.Drawing.Point(563, 73);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(625, 493);
+            this.groupBox1.Size = new System.Drawing.Size(625, 502);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Graficas";
             // 
             // imagen
             // 
-            this.imagen.Location = new System.Drawing.Point(6, 18);
+            this.imagen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imagen.Location = new System.Drawing.Point(0, 0);
             this.imagen.Name = "imagen";
-            this.imagen.Size = new System.Drawing.Size(613, 469);
-            this.imagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.imagen.Size = new System.Drawing.Size(619, 483);
+            this.imagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.imagen.TabIndex = 0;
             this.imagen.TabStop = false;
             // 
@@ -494,6 +497,16 @@ namespace Compi1_Proyecto1
             this.cbxAFN.SelectedIndexChanged += new System.EventHandler(this.cbxAFN_SelectedIndexChanged);
             this.cbxAFN.SelectedValueChanged += new System.EventHandler(this.cbxAFN_SelectedValueChanged);
             // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.imagen);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 16);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(619, 483);
+            this.panel1.TabIndex = 1;
+            // 
             // form1
             // 
             this.BackColor = System.Drawing.Color.DeepSkyBlue;
@@ -529,6 +542,8 @@ namespace Compi1_Proyecto1
             ((System.ComponentModel.ISupportInitialize)(this.imagen)).EndInit();
             this.Seleccion.ResumeLayout(false);
             this.Seleccion.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -590,6 +605,7 @@ namespace Compi1_Proyecto1
     private System.Windows.Forms.RadioButton radioButton3;
     private System.Windows.Forms.RadioButton radioButton4;
     private System.Windows.Forms.ComboBox cbxAFN;
+    private System.Windows.Forms.Panel panel1;
   }
 }
 
