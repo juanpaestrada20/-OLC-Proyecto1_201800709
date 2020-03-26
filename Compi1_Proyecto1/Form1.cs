@@ -1,17 +1,19 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Compi1_Proyecto1
 {
-  public partial class Form1 : Form
+  public partial class form1 : Form
   {
     private int numPestana;
     private static string ruta;
+    private static LinkedList<Imagen> rutaImagenes = new LinkedList<Imagen>();
 
-    public Form1()
+    public form1()
     {
       InitializeComponent();
       numPestana = 0;
@@ -197,10 +199,11 @@ namespace Compi1_Proyecto1
     private AnalizadorLexico analizador;
     private AnalizadorSintactico sintactico;
 
+    internal static LinkedList<Imagen> RutaImagenes { get => rutaImagenes; set => rutaImagenes = value; }
+
     private void Start()
     {
-      //analizador.imprimirTokens();
-
+      cbxAFN.Items.Clear();
       if (tabControl2.TabPages.Count == 0)
       {
         MessageBox.Show("No hay ninguna pestaña para analizar", "Analisis no realizado");
@@ -221,6 +224,9 @@ namespace Compi1_Proyecto1
             {
               MessageBox.Show("Analisis Finalizado\nNo se han encontrado errores", "Analisis Completado");
               sintactico.parser(listaTokens);
+              rellenarComboBox();
+
+              //listaTokens = sintactico.changeTokens();
             }
             else
             {
@@ -228,6 +234,15 @@ namespace Compi1_Proyecto1
             }
           }
         }
+      }
+    }
+
+    private void rellenarComboBox()
+    {
+      cbxAFN.Items.Clear();
+      foreach (Imagen item in RutaImagenes)
+      {
+        cbxAFN.Items.Add(item.name);
       }
     }
 
@@ -264,6 +279,9 @@ namespace Compi1_Proyecto1
       numPestana = 0;
       listaTokens.Clear();
       tabControl2.TabPages.Clear();
+      imagen.Image = null;
+      cbxAFN.Items.Clear();
+      rutaImagenes.Clear();
     }
 
     private void lblOpenFile_Click(object sender, EventArgs e)
@@ -324,6 +342,94 @@ namespace Compi1_Proyecto1
     private void btnErrores_Click(object sender, EventArgs e)
     {
       openMistakes();
+    }
+
+    private void btnVerify_Click(object sender, EventArgs e)
+    {
+      verifyLexemas();
+    }
+
+    private void cbxAFN_SelectedValueChanged(object sender, EventArgs e)
+    {
+      int num = 0;
+      num = cbxAFN.SelectedIndex + 1;
+
+      if (radioButton1.Checked)
+      {
+        string nombre = ruta + "\\imagen" + num + ".png";
+        imagen.Image = Image.FromFile(nombre);
+      }
+      else if (radioButton2.Checked)
+      {
+        string nombre = ruta + "\\estados" + num + ".png";
+        imagen.Image = Image.FromFile(nombre);
+      }
+      else if (radioButton3.Checked)
+      {
+        string nombre = ruta + "\\transiciones" + num + ".png";
+        imagen.Image = Image.FromFile(nombre);
+      }
+      else if (radioButton4.Checked)
+      {
+        string nombre = ruta + "\\afd" + num + ".png";
+        imagen.Image = Image.FromFile(nombre);
+      }
+    }
+
+    private void radioButton2_CheckedChanged(object sender, EventArgs e)
+    {
+      if (cbxAFN.Items.Count > 0)
+      {
+        if (radioButton2.Checked)
+        {
+          int num = cbxAFN.SelectedIndex + 1;
+          string nombre = ruta + "\\estados" + num + ".png";
+          imagen.Image = Image.FromFile(nombre);
+        }
+      }
+    }
+
+    private void cbxAFN_SelectedIndexChanged(object sender, EventArgs e)
+    {
+    }
+
+    private void radioButton1_CheckedChanged(object sender, EventArgs e)
+    {
+      if (cbxAFN.Items.Count > 0)
+      {
+        if (radioButton1.Checked)
+        {
+          int num = cbxAFN.SelectedIndex + 1;
+          string nombre = ruta + "\\imagen" + num + ".png";
+          imagen.Image = Image.FromFile(nombre);
+        }
+      }
+    }
+
+    private void radioButton4_CheckedChanged(object sender, EventArgs e)
+    {
+      if (cbxAFN.Items.Count > 0)
+      {
+        if (radioButton4.Checked)
+        {
+          int num = cbxAFN.SelectedIndex + 1;
+          string nombre = ruta + "\\afd" + num + ".png";
+          imagen.Image = Image.FromFile(nombre);
+        }
+      }
+    }
+
+    private void radioButton3_CheckedChanged(object sender, EventArgs e)
+    {
+      if (cbxAFN.Items.Count > 0)
+      {
+        if (radioButton3.Checked)
+        {
+          int num = cbxAFN.SelectedIndex + 1;
+          string nombre = ruta + "\\transiciones" + num + ".png";
+          imagen.Image = Image.FromFile(nombre);
+        }
+      }
     }
   }
 }

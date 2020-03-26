@@ -255,6 +255,20 @@ namespace Compi1_Proyecto1
               columna++;
               agregarToken(Token.Tipo.CONJUNTO);
             }
+            else if (c.CompareTo('>') == 0 && auxlex.Contains(",") && salidaTokens.Last().getTipoToken() != Token.Tipo.INICIO_MULTILINEA)
+            {
+              agregarToken(Token.Tipo.COMA);
+              auxlex += c;
+              columna++;
+              agregarToken(Token.Tipo.CARACTER);
+            }
+            else if (c.CompareTo(',') == 0)
+            {
+              agregarToken(Token.Tipo.CARACTER);
+              auxlex += c;
+              columna++;
+              agregarToken(Token.Tipo.COMA);
+            }
             else
             {
               auxlex += c;
@@ -347,9 +361,8 @@ namespace Compi1_Proyecto1
             }
             else
             {
-              auxlex += c;
-              columna++;
               agregarToken(Token.Tipo.CARACTER);
+              i--;
             }
             break;
           //dentro de llaves

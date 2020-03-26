@@ -143,13 +143,6 @@ namespace Compi1_Proyecto1
       {
         match(Token.Tipo.CONJUNTO);
       }
-      else if (actual.getTipoToken() == Token.Tipo.CARACTER)
-      {
-        conjunto += actual.getValor();
-        salidaSintactico.Remove(salidaSintactico.ElementAt(controlToken));
-        actual = salidaSintactico.ElementAt(controlToken);
-        otroCaracter();
-      }
       else if (actual.getTipoToken() == Token.Tipo.ID)
       {
         actual.changeTipo(Token.Tipo.CONJUNTO);
@@ -158,6 +151,13 @@ namespace Compi1_Proyecto1
       else if (actual.getTipoToken() == Token.Tipo.NUMERO)
       {
         actual.changeTipo(Token.Tipo.CARACTER);
+        conjunto += actual.getValor();
+        salidaSintactico.Remove(salidaSintactico.ElementAt(controlToken));
+        actual = salidaSintactico.ElementAt(controlToken);
+        otroCaracter();
+      }
+      else
+      {
         conjunto += actual.getValor();
         salidaSintactico.Remove(salidaSintactico.ElementAt(controlToken));
         actual = salidaSintactico.ElementAt(controlToken);
@@ -229,14 +229,9 @@ namespace Compi1_Proyecto1
       conjunto = "";
     }
 
-    public void imprimir()
+    public LinkedList<Token> changeTokens()
     {
-      int contador = 1;
-      foreach (Token item in listaAnalizada)
-      {
-        Console.WriteLine(contador + ". " + item.getTipo() + " -> " + item.getValor());
-        contador++;
-      }
+      return salidaSintactico;
     }
   }
 }

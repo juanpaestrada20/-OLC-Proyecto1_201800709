@@ -1,6 +1,6 @@
 namespace Compi1_Proyecto1
 {
-    partial class Form1
+    partial class form1
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -28,7 +28,7 @@ namespace Compi1_Proyecto1
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(form1));
             this.Menu = new System.Windows.Forms.Panel();
             this.lblRestart = new System.Windows.Forms.Label();
             this.btnRestart = new System.Windows.Forms.PictureBox();
@@ -54,8 +54,15 @@ namespace Compi1_Proyecto1
             this.btnClose = new System.Windows.Forms.PictureBox();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.imagen = new System.Windows.Forms.PictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.Seleccion = new System.Windows.Forms.GroupBox();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cbxAFN = new System.Windows.Forms.ComboBox();
             this.Menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnRestart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnErrores)).BeginInit();
@@ -71,6 +78,9 @@ namespace Compi1_Proyecto1
             ((System.ComponentModel.ISupportInitialize)(this.btnNormalSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMaximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imagen)).BeginInit();
+            this.Seleccion.SuspendLayout();
             this.SuspendLayout();
             // 
             // Menu
@@ -233,6 +243,7 @@ namespace Compi1_Proyecto1
             this.btnVerify.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnVerify.TabIndex = 4;
             this.btnVerify.TabStop = false;
+            this.btnVerify.Click += new System.EventHandler(this.btnVerify_Click);
             // 
             // btnStart
             // 
@@ -373,12 +384,22 @@ namespace Compi1_Proyecto1
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.imagen);
             this.groupBox1.Location = new System.Drawing.Point(563, 73);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(625, 493);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Graficas";
+            // 
+            // imagen
+            // 
+            this.imagen.Location = new System.Drawing.Point(6, 18);
+            this.imagen.Name = "imagen";
+            this.imagen.Size = new System.Drawing.Size(613, 469);
+            this.imagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.imagen.TabIndex = 0;
+            this.imagen.TabStop = false;
             // 
             // groupBox2
             // 
@@ -390,21 +411,94 @@ namespace Compi1_Proyecto1
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "groupBox2";
             // 
-            // groupBox3
+            // Seleccion
             // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox3.Location = new System.Drawing.Point(563, 581);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(625, 198);
-            this.groupBox3.TabIndex = 5;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "groupBox3";
+            this.Seleccion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Seleccion.Controls.Add(this.radioButton4);
+            this.Seleccion.Controls.Add(this.radioButton3);
+            this.Seleccion.Controls.Add(this.radioButton2);
+            this.Seleccion.Controls.Add(this.radioButton1);
+            this.Seleccion.Controls.Add(this.label6);
+            this.Seleccion.Controls.Add(this.cbxAFN);
+            this.Seleccion.Location = new System.Drawing.Point(563, 581);
+            this.Seleccion.Name = "Seleccion";
+            this.Seleccion.Size = new System.Drawing.Size(625, 198);
+            this.Seleccion.TabIndex = 5;
+            this.Seleccion.TabStop = false;
+            this.Seleccion.Text = "Seleccion";
             // 
-            // Form1
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Location = new System.Drawing.Point(307, 123);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(46, 17);
+            this.radioButton4.TabIndex = 5;
+            this.radioButton4.TabStop = true;
+            this.radioButton4.Text = "AFD";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(307, 100);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(130, 17);
+            this.radioButton3.TabIndex = 4;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "Tabla de Transiciones";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(307, 77);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(108, 17);
+            this.radioButton2.TabIndex = 3;
+            this.radioButton2.Text = "Tabla de Estados";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(307, 54);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(46, 17);
+            this.radioButton1.TabIndex = 2;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "AFN";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(30, 34);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(28, 13);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "AFN";
+            // 
+            // cbxAFN
+            // 
+            this.cbxAFN.FormattingEnabled = true;
+            this.cbxAFN.Location = new System.Drawing.Point(33, 50);
+            this.cbxAFN.Name = "cbxAFN";
+            this.cbxAFN.Size = new System.Drawing.Size(124, 21);
+            this.cbxAFN.TabIndex = 0;
+            this.cbxAFN.SelectedIndexChanged += new System.EventHandler(this.cbxAFN_SelectedIndexChanged);
+            this.cbxAFN.SelectedValueChanged += new System.EventHandler(this.cbxAFN_SelectedValueChanged);
+            // 
+            // form1
             // 
             this.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.ClientSize = new System.Drawing.Size(1200, 800);
-            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.Seleccion);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.BarraTop);
             this.Controls.Add(this.Menu);
@@ -412,7 +506,7 @@ namespace Compi1_Proyecto1
             this.Controls.Add(this.groupBox2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
+            this.Name = "form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Menu.ResumeLayout(false);
@@ -431,6 +525,10 @@ namespace Compi1_Proyecto1
             ((System.ComponentModel.ISupportInitialize)(this.btnNormalSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMaximize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.imagen)).EndInit();
+            this.Seleccion.ResumeLayout(false);
+            this.Seleccion.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -484,7 +582,14 @@ namespace Compi1_Proyecto1
     private System.Windows.Forms.TabControl tabControl2;
     private System.Windows.Forms.GroupBox groupBox1;
     private System.Windows.Forms.GroupBox groupBox2;
-    private System.Windows.Forms.GroupBox groupBox3;
+    private System.Windows.Forms.GroupBox Seleccion;
+    private System.Windows.Forms.Label label6;
+    private System.Windows.Forms.PictureBox imagen;
+    private System.Windows.Forms.RadioButton radioButton2;
+    private System.Windows.Forms.RadioButton radioButton1;
+    private System.Windows.Forms.RadioButton radioButton3;
+    private System.Windows.Forms.RadioButton radioButton4;
+    private System.Windows.Forms.ComboBox cbxAFN;
   }
 }
 
