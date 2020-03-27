@@ -262,7 +262,7 @@ namespace Compi1_Proyecto1
               columna++;
               agregarToken(Token.Tipo.CARACTER);
             }
-            else if (c.CompareTo(',') == 0)
+            else if (c.CompareTo(',') == 0 && salidaTokens.Last().getTipoToken() != Token.Tipo.INICIO_MULTILINEA)
             {
               agregarToken(Token.Tipo.CARACTER);
               auxlex += c;

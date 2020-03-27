@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -538,11 +539,11 @@ namespace Compi1_Proyecto1
       System.IO.File.WriteAllText(rdot, grafo.ToString());
       String comandoDot = "dot.exe -Tpng " + rdot + " -o " + rpng;
       var comando = string.Format(comandoDot);
-      var procStart = new System.Diagnostics.ProcessStartInfo("cmd", "/C" + comando);
-      var proc = new System.Diagnostics.Process
-      {
-        StartInfo = procStart
-      };
+      var procStart = new ProcessStartInfo("cmd", "/C" + comando);
+      var proc = new Process();
+      proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+      proc.StartInfo.CreateNoWindow = true;
+      proc.StartInfo = procStart;
       proc.Start();
       proc.WaitForExit();
     }

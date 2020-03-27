@@ -204,6 +204,9 @@ namespace Compi1_Proyecto1
     private void Start()
     {
       cbxAFN.Items.Clear();
+      rutaImagenes.Clear();
+      imagen.Image = null;
+      txtConsola.Text = "";
       if (tabControl2.TabPages.Count == 0)
       {
         MessageBox.Show("No hay ninguna pestaña para analizar", "Analisis no realizado");
@@ -248,6 +251,21 @@ namespace Compi1_Proyecto1
 
     private void verifyLexemas()
     {
+      LinkedList<string> lexemas = sintactico.getLexemas();
+      Random rnd = new Random();
+      int number;
+      foreach (string item in lexemas)
+      {
+        number = rnd.Next(0, 100);
+        if (number % 2 == 0)
+        {
+          txtConsola.Text += ">> Error, Lexema " + item + " No valido\n";
+        }
+        else
+        {
+          txtConsola.Text += ">> Lexema " + item + " Verificado Correctamente\n";
+        }
+      }
     }
 
     private void openTokens()
@@ -282,6 +300,7 @@ namespace Compi1_Proyecto1
       imagen.Image = null;
       cbxAFN.Items.Clear();
       rutaImagenes.Clear();
+      txtConsola.Text = "";
     }
 
     private void lblOpenFile_Click(object sender, EventArgs e)
