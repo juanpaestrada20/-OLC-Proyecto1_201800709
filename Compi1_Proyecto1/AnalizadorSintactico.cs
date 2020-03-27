@@ -75,6 +75,8 @@ namespace Compi1_Proyecto1
       }
     }
 
+    private LinkedList<string> lexemas = new LinkedList<string>();
+
     private void EvaluarExpresion()
     {
       if (actual.getTipoToken() == Token.Tipo.INICIO_COMENTARIO)
@@ -92,6 +94,7 @@ namespace Compi1_Proyecto1
       }
       else if (actual.getTipoToken() == Token.Tipo.ID)
       {
+        lexemas.AddLast(actual.getValor());
         match(Token.Tipo.ID);
         match(Token.Tipo.DOS_PUNTOS);
         match(Token.Tipo.COMILLA_DOBLE);
@@ -100,6 +103,11 @@ namespace Compi1_Proyecto1
         match(Token.Tipo.PUNTO_COMA);
         EvaluarExpresion();
       }
+    }
+
+    public LinkedList<string> getLexemas()
+    {
+      return lexemas;
     }
 
     private void ExpresionRegular()

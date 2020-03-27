@@ -53,9 +53,7 @@ namespace Compi1_Proyecto1
             this.btnMaximize = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.PictureBox();
             this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.imagen = new System.Windows.Forms.PictureBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.Consola = new System.Windows.Forms.GroupBox();
             this.Seleccion = new System.Windows.Forms.GroupBox();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
@@ -63,6 +61,9 @@ namespace Compi1_Proyecto1
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.label6 = new System.Windows.Forms.Label();
             this.cbxAFN = new System.Windows.Forms.ComboBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.imagen = new System.Windows.Forms.PictureBox();
+            this.txtConsola = new System.Windows.Forms.RichTextBox();
             this.Menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnRestart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnErrores)).BeginInit();
@@ -78,9 +79,10 @@ namespace Compi1_Proyecto1
             ((System.ComponentModel.ISupportInitialize)(this.btnNormalSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMaximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imagen)).BeginInit();
+            this.Consola.SuspendLayout();
             this.Seleccion.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imagen)).BeginInit();
             this.SuspendLayout();
             // 
             // Menu
@@ -381,35 +383,16 @@ namespace Compi1_Proyecto1
             this.tabControl2.Size = new System.Drawing.Size(452, 493);
             this.tabControl2.TabIndex = 2;
             // 
-            // groupBox1
+            // Consola
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.imagen);
-            this.groupBox1.Location = new System.Drawing.Point(563, 73);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(625, 493);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Graficas";
-            // 
-            // imagen
-            // 
-            this.imagen.Location = new System.Drawing.Point(6, 18);
-            this.imagen.Name = "imagen";
-            this.imagen.Size = new System.Drawing.Size(613, 469);
-            this.imagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.imagen.TabIndex = 0;
-            this.imagen.TabStop = false;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.groupBox2.Location = new System.Drawing.Point(88, 581);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(452, 198);
-            this.groupBox2.TabIndex = 4;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
+            this.Consola.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.Consola.Controls.Add(this.txtConsola);
+            this.Consola.Location = new System.Drawing.Point(88, 581);
+            this.Consola.Name = "Consola";
+            this.Consola.Size = new System.Drawing.Size(452, 198);
+            this.Consola.TabIndex = 4;
+            this.Consola.TabStop = false;
+            this.Consola.Text = "Consola";
             // 
             // Seleccion
             // 
@@ -486,6 +469,7 @@ namespace Compi1_Proyecto1
             // 
             // cbxAFN
             // 
+            this.cbxAFN.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxAFN.FormattingEnabled = true;
             this.cbxAFN.Location = new System.Drawing.Point(33, 50);
             this.cbxAFN.Name = "cbxAFN";
@@ -494,16 +478,49 @@ namespace Compi1_Proyecto1
             this.cbxAFN.SelectedIndexChanged += new System.EventHandler(this.cbxAFN_SelectedIndexChanged);
             this.cbxAFN.SelectedValueChanged += new System.EventHandler(this.cbxAFN_SelectedValueChanged);
             // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.imagen);
+            this.panel1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panel1.Location = new System.Drawing.Point(563, 73);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(625, 502);
+            this.panel1.TabIndex = 6;
+            // 
+            // imagen
+            // 
+            this.imagen.Location = new System.Drawing.Point(3, 3);
+            this.imagen.Name = "imagen";
+            this.imagen.Size = new System.Drawing.Size(100, 50);
+            this.imagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.imagen.TabIndex = 0;
+            this.imagen.TabStop = false;
+            // 
+            // txtConsola
+            // 
+            this.txtConsola.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.txtConsola.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtConsola.Enabled = false;
+            this.txtConsola.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtConsola.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.txtConsola.Location = new System.Drawing.Point(0, 15);
+            this.txtConsola.Name = "txtConsola";
+            this.txtConsola.ReadOnly = true;
+            this.txtConsola.Size = new System.Drawing.Size(446, 177);
+            this.txtConsola.TabIndex = 0;
+            this.txtConsola.Text = "";
+            // 
             // form1
             // 
             this.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.ClientSize = new System.Drawing.Size(1200, 800);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.Seleccion);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.BarraTop);
             this.Controls.Add(this.Menu);
             this.Controls.Add(this.tabControl2);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.Consola);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "form1";
@@ -525,10 +542,12 @@ namespace Compi1_Proyecto1
             ((System.ComponentModel.ISupportInitialize)(this.btnNormalSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMaximize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.imagen)).EndInit();
+            this.Consola.ResumeLayout(false);
             this.Seleccion.ResumeLayout(false);
             this.Seleccion.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imagen)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -580,16 +599,17 @@ namespace Compi1_Proyecto1
     private System.Windows.Forms.Label lblRestart;
     private System.Windows.Forms.PictureBox btnRestart;
     private System.Windows.Forms.TabControl tabControl2;
-    private System.Windows.Forms.GroupBox groupBox1;
-    private System.Windows.Forms.GroupBox groupBox2;
+    private System.Windows.Forms.GroupBox Consola;
     private System.Windows.Forms.GroupBox Seleccion;
     private System.Windows.Forms.Label label6;
-    private System.Windows.Forms.PictureBox imagen;
     private System.Windows.Forms.RadioButton radioButton2;
     private System.Windows.Forms.RadioButton radioButton1;
     private System.Windows.Forms.RadioButton radioButton3;
     private System.Windows.Forms.RadioButton radioButton4;
     private System.Windows.Forms.ComboBox cbxAFN;
+    private System.Windows.Forms.Panel panel1;
+    private System.Windows.Forms.PictureBox imagen;
+    private System.Windows.Forms.RichTextBox txtConsola;
   }
 }
 
