@@ -32,7 +32,17 @@ namespace Compi1_Proyecto1
 
     public void addTransicion(Destino estado)
     {
-      transiciones.AddLast(estado);
+      bool repeat = false;
+      for (int i = 0; i < transiciones.Count; i++)
+      {
+        if (transiciones.ElementAt(i).getDestino() == estado.getDestino() && transiciones.ElementAt(i).getLetra() == estado.getLetra())
+        {
+          repeat = true;
+          break;
+        }
+      }
+      if (!repeat)
+        transiciones.AddLast(estado);
     }
 
     public void isEstadoFinal()

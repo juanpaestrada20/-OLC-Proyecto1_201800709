@@ -53,8 +53,6 @@ namespace Compi1_Proyecto1
             this.btnMaximize = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.PictureBox();
             this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.imagen = new System.Windows.Forms.PictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.Seleccion = new System.Windows.Forms.GroupBox();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
@@ -64,6 +62,7 @@ namespace Compi1_Proyecto1
             this.label6 = new System.Windows.Forms.Label();
             this.cbxAFN = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.imagen = new System.Windows.Forms.PictureBox();
             this.Menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnRestart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnErrores)).BeginInit();
@@ -79,10 +78,9 @@ namespace Compi1_Proyecto1
             ((System.ComponentModel.ISupportInitialize)(this.btnNormalSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMaximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imagen)).BeginInit();
             this.Seleccion.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imagen)).BeginInit();
             this.SuspendLayout();
             // 
             // Menu
@@ -383,27 +381,6 @@ namespace Compi1_Proyecto1
             this.tabControl2.Size = new System.Drawing.Size(452, 493);
             this.tabControl2.TabIndex = 2;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.panel1);
-            this.groupBox1.Location = new System.Drawing.Point(563, 73);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(625, 502);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Graficas";
-            // 
-            // imagen
-            // 
-            this.imagen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.imagen.Location = new System.Drawing.Point(0, 0);
-            this.imagen.Name = "imagen";
-            this.imagen.Size = new System.Drawing.Size(619, 483);
-            this.imagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.imagen.TabIndex = 0;
-            this.imagen.TabStop = false;
-            // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -501,18 +478,26 @@ namespace Compi1_Proyecto1
             // 
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.imagen);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 16);
+            this.panel1.Location = new System.Drawing.Point(563, 73);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(619, 483);
-            this.panel1.TabIndex = 1;
+            this.panel1.Size = new System.Drawing.Size(625, 502);
+            this.panel1.TabIndex = 6;
+            // 
+            // imagen
+            // 
+            this.imagen.Location = new System.Drawing.Point(3, 3);
+            this.imagen.Name = "imagen";
+            this.imagen.Size = new System.Drawing.Size(100, 50);
+            this.imagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.imagen.TabIndex = 0;
+            this.imagen.TabStop = false;
             // 
             // form1
             // 
             this.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.ClientSize = new System.Drawing.Size(1200, 800);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.Seleccion);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.BarraTop);
             this.Controls.Add(this.Menu);
             this.Controls.Add(this.tabControl2);
@@ -538,12 +523,11 @@ namespace Compi1_Proyecto1
             ((System.ComponentModel.ISupportInitialize)(this.btnNormalSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMaximize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.imagen)).EndInit();
             this.Seleccion.ResumeLayout(false);
             this.Seleccion.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imagen)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -595,17 +579,16 @@ namespace Compi1_Proyecto1
     private System.Windows.Forms.Label lblRestart;
     private System.Windows.Forms.PictureBox btnRestart;
     private System.Windows.Forms.TabControl tabControl2;
-    private System.Windows.Forms.GroupBox groupBox1;
     private System.Windows.Forms.GroupBox groupBox2;
     private System.Windows.Forms.GroupBox Seleccion;
     private System.Windows.Forms.Label label6;
-    private System.Windows.Forms.PictureBox imagen;
     private System.Windows.Forms.RadioButton radioButton2;
     private System.Windows.Forms.RadioButton radioButton1;
     private System.Windows.Forms.RadioButton radioButton3;
     private System.Windows.Forms.RadioButton radioButton4;
     private System.Windows.Forms.ComboBox cbxAFN;
     private System.Windows.Forms.Panel panel1;
+    private System.Windows.Forms.PictureBox imagen;
   }
 }
 

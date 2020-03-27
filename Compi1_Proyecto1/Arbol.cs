@@ -244,7 +244,7 @@ namespace Compi1_Proyecto1
         {
           raiz = nodos.Pop();
         }
-        catch (InvalidOperationException e)
+        catch (InvalidOperationException)
         {
           Console.WriteLine("error");
         }
@@ -578,17 +578,26 @@ namespace Compi1_Proyecto1
                     {
                       cerraduras.AddLast(temporal);
                     }
-                    if (temporal.isEstadoFinal())
-                    {
-                      transition.isEstadoFinal();
-                    }
-                    transition.addTransicion(new Destino(item.getDato(), temporal.getNumEstado()));
                   }
                 }
+                transition.addTransicion(new Destino(item.getDato(), temporal.getNumEstado()));
               }
             }
           }
           transicionesEstados.AddLast(transition);
+        }
+        foreach (Cerradura cer in cerraduras)
+        {
+          if (cer.isEstadoFinal())
+          {
+            foreach (Transicion t in transicionesEstados)
+            {
+              if (cer.getNumEstado() == t.getEstado())
+              {
+                t.isEstadoFinal();
+              }
+            }
+          }
         }
       }
     }
@@ -605,7 +614,10 @@ namespace Compi1_Proyecto1
       foreach (int i in m.getEstados())
       {
         aux2 = findNode(aux, i);
+        encontrados.Add(aux2);
+        desVisitarTodo(aux2);
         nueva.setEstados(transicionesEpsilon(encontrados, aux2));
+        desVisitarTodo(aux2);
         nueva.ordenarEstados();
         if (nueva.getEstados().Contains(lastNode))
         {
@@ -646,6 +658,7 @@ namespace Compi1_Proyecto1
       }
       else if (aux.Index == index)
       {
+        aux.visitaThompson = true;
         return aux;
       }
       else if (aux.getTipo().CompareTo("transicion") == 0 && !aux.visitaThompson)
@@ -713,21 +726,32 @@ namespace Compi1_Proyecto1
     {
       Nodo aux = n;
 
-      if (aux.getDato() == "epsilon")
+      if (n != null)
       {
-        if (!actual.Contains(aux))
+        if (aux.getDato() == "epsilon")
         {
-          actual.Add(aux);
-        }
-        if (aux.getIzquierda() != null)
-        {
-          actual.Add(aux.getIzquierda());
-          actual = transicionesEpsilon(actual, aux.getIzquierda());
-        }
-        if (aux.getDerecha() != null)
-        {
-          actual.Add(aux.getDerecha());
-          actual = transicionesEpsilon(actual, aux.getDerecha());
+          if (!actual.Contains(aux))
+          {
+            actual.Add(aux);
+          }
+          if (aux.visitaThompson == true)
+          {
+            return actual;
+          }
+
+          if (aux.getIzquierda() != null)
+          {
+            actual.Add(aux.getIzquierda());
+            aux.visitaThompson = true;
+            actual = transicionesEpsilon(actual, aux.getIzquierda());
+          }
+          if (aux.getDerecha() != null)
+          {
+            actual.Add(aux.getDerecha());
+            aux.visitaThompson = true;
+
+            actual = transicionesEpsilon(actual, aux.getDerecha());
+          }
         }
       }
 
@@ -831,6 +855,7 @@ namespace Compi1_Proyecto1
         string destino = "";
         foreach (Nodo ter in NonTerminals)
         {
+          flag = false;
           foreach (Destino des in tran.getTransiciones())
           {
             if (des.getLetra() == ter.getDato())
